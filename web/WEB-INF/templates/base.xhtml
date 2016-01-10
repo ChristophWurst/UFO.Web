@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>
+            <ui:insert name="title">UFO</ui:insert> - UFO
+        </title>
+        <h:outputStylesheet name="ufo.css"/>
+    </h:head>
+    <h:body>
+        <div id="header">
+            <ui:insert name="header">
+                <ui:include src="/WEB-INF/templates/header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div id="content">
+            <ui:insert name="content">
+                <p:layout style="min-width:400px;min-height:200px;">
+                    <p:layoutUnit position="west" size="200">
+                        <ui:insert name="sidebar" />
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        <ui:insert name="main-content" />
+                    </p:layoutUnit>
+                </p:layout>    
+            </ui:insert>
+        </div>
+        <div id="footer">
+            WEA5 – Christoph Wurst 2016
+        </div>
+    </h:body>
+</html>
+
