@@ -21,4 +21,14 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <context-param>
+        <param-name>BUSINESS_DELEGATE</param-name>
+        <param-value>wea.ufo.data.DummyBusinessDelegate</param-value>
+    </context-param>
+    
+    <listener>
+        <display-name>InitializeContextListener</display-name>
+        <listener-class>wea.ufo.util.InitializeContextListener</listener-class>
+    </listener>
 </web-app>

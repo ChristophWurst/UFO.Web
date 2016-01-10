@@ -6,13 +6,27 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/base.xhtml">
         <ui:define name="title">Venues</ui:define>
-        <ui:define name="sidebar">
-            <p:dataList value="#{venueData.areas}" var="area" type="ordered">
-                <a href="venues.xhtml?areaId=#{area.id}">#{area.name}</a>
-            </p:dataList>
-        </ui:define>
-        <ui:define name="main-content">
-            cont
+        <ui:define name="content">
+            <h:form>
+                <p:layout style="min-width:400px;min-height:200px;">
+                    <p:layoutUnit position="west" size="200">
+                        <p:dataTable id="deptTable" var="area" value="#{areaData.areas}"
+                                     selectionMode="single" rowKey="#{area.id}">
+                            <p:ajax event="rowSelect" listener="#{areaData.onAreaSelected}" update="@form"/>
+                            <p:column>
+                                <h:outputText id="name" value="#{area.name}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        <p:dataTable id="empTable" var="venue" value="#{venueData.venues}">
+                            <p:column>
+                                <h:outputText id="name" value="#{venue.name}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

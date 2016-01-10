@@ -1,46 +1,74 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wea.ufo.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import wea.ufo.model.*;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import wea.ufo.model.Area;
+import wea.ufo.model.Venue;
+import wea.ufo.util.ServiceLocator;
 
 /**
- * @author Christoph Wurst
+ * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
 @ManagedBean(name = "venueData")
-public class VenueData {
+@RequestScoped
+public class VenueData implements Serializable {
 
     private static final Logger logger = Logger.getAnonymousLogger();
+    private List<Venue> venues;
+    private Area selectedArea;
+    private Venue selectedVenue;
+
+    @ManagedProperty("#{areaData}")
+    private AreaData areaData;
 
     public VenueData() {
-        logger.log(Level.INFO, "VenueData created");
+        venues = new ArrayList<>();
+    }
+
+    public void setAreaData(AreaData ad) {
+        areaData = ad;
+    }
+
+    /**
+     * Get the value of selectedVenue
+     *
+     * @return the value of selectedVenue
+     */
+    public Venue getSelectedVenue() {
+        return selectedVenue;
+    }
+
+    /**
+     * Set the value of selectedVenue
+     *
+     * @param selectedVenue new value of selectedVenue
+     */
+    public void setSelectedVenue(Venue selectedVenue) {
+        this.selectedVenue = selectedVenue;
+    }
+
+    private void loadVenues(Area a) {
+        logger.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
+        venues = ServiceLocator.getInstance().getUFOBusinessDelegate().getVenuesForArea(a);
     }
 
     public List<Venue> getVenues() {
-        List<Venue> result = new ArrayList<>();
-        Venue v1 = new Venue();
-        v1.setName("V1");
-        Venue v2 = new Venue();
-        v2.setName("V2");
-        result.add(v1);
-        result.add(v2);
-        return result;
+        Area a = areaData.getSelectedArea();
+        if (a != selectedArea) {
+            selectedArea = a;
+            loadVenues(a);
+        }
+        return venues;
     }
-
-    public List<Area> getAreas() {
-        List<Area> result = new ArrayList<>();
-        Area a1 = new Area();
-        a1.setId(1);
-        a1.setName("Hauptplatz");
-        result.add(a1);
-        Area a2 = new Area();
-        a2.setId(2);
-        a2.setName("Rathausplatz");
-        result.add(a2);
-        return result;
-    }
-
 }
