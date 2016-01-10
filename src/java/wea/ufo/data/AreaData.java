@@ -18,12 +18,10 @@ import wea.ufo.util.ServiceLocator;
 public class AreaData implements Serializable {
 
     private static final Logger logger = Logger.getAnonymousLogger();
-    private List<Area> areas;
+    private final List<Area> areas;
     private Area selectedArea;
-    public double x;
 
     public AreaData() {
-        x = Math.random();
         logger.log(Level.INFO, "AreaData created");
 
         areas = ServiceLocator.getInstance().getUFOBusinessDelegate().getAreas();
