@@ -9,7 +9,7 @@
 		<ui:define name="content">
 			<h:form>
 				<div id="master1">
-					<p:dataTable id="deptTable" var="area" value="#{areaData.areas}"
+					<p:dataTable id="areaTable" var="area" value="#{areaData.areas}"
 						     selectionMode="single" rowKey="#{area.id}">
 						<p:ajax event="rowSelect" listener="#{areaData.onAreaSelected}" update="@form"/>
 						<p:column>
@@ -18,14 +18,16 @@
 					</p:dataTable>
 				</div>
 				<div id="master2">
-					<p:dataTable id="empTable" var="venue" value="#{venueData.venues}">
+					<p:dataTable id="venueTable" var="venue" value="#{venueData.venues}"
+						     selectionMode="single" rowKey="#{venue.id}">
+						<p:ajax event="rowSelect" listener="#{venueData.onVenueSelected}" update="@form"/>
 						<p:column>
 							<h:outputText id="name" value="#{venue.name}"/>
 						</p:column>
 					</p:dataTable>
 				</div>
 				<div id="master-detail">
-					detail
+					<h2><h:outputText value="#{venueData.selectedVenue.name}" /></h2>
 				</div>
 			</h:form>
 		</ui:define>

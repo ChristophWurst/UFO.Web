@@ -51,7 +51,7 @@ body {
 #content {
 	min-height: 500px;
 }
-#master1, #master2, #main-content {
+#master1, #master2, #master-detail {
 	position: relative;
 	float: left;
 }

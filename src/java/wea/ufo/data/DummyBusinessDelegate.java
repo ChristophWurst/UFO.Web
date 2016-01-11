@@ -32,6 +32,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 			for (int i = 0; i < 20; i++) {
 				Venue v = new Venue();
 				v.setAreaId(a.getId());
+				v.setId(i);
 				v.setName("V" + i);
 				venues.add(v);
 			}

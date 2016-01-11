@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import org.primefaces.event.SelectEvent;
 import wea.ufo.model.Area;
 import wea.ufo.model.Venue;
 import wea.ufo.util.ServiceLocator;
@@ -56,6 +57,12 @@ public class VenueData implements Serializable {
 	 */
 	public void setSelectedVenue(Venue selectedVenue) {
 		this.selectedVenue = selectedVenue;
+	}
+
+	public void onVenueSelected(SelectEvent e) {
+		Venue selected = (Venue) e.getObject();
+		setSelectedVenue(selected);
+		logger.log(Level.INFO, "Venue selected: {0}", getSelectedVenue().getName());
 	}
 
 	private void loadVenues(Area a) {
