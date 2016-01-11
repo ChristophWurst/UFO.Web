@@ -2,12 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <div id="navigation-logo">LOGO</div>
-    <h:form>
-        <h:commandButton action="schedule?faces-redirect=true" value="Schedule" />
-        <h:commandButton action="artists?faces-redirect=true" value="Artists" />
-        <h:commandButton action="venues?faces-redirect=true" value="Venues" />
-    </h:form>
-
+	<div id="navigation-logo">LOGO</div>
+	<h:form>
+		<h:commandButton action="schedule?faces-redirect=true" value="Schedule" />
+		<h:commandButton action="artists?faces-redirect=true" value="Artists" />
+		<h:commandButton action="venues?faces-redirect=true" value="Venues" />
+	</h:form>
+	<div id="header-login-name">
+		<h:form>
+			<h:panelGroup layout="block" rendered="#{userData.loggedIn}">
+				logged in as #{userData.email} 
+				<h:commandButton action="#{userData.logout}" value="Logout" />
+			</h:panelGroup>
+			<h:panelGroup layout="block" rendered="#{userData.loggedIn == false}">
+				<h:outputText value="not logged in " rendered="#{userData.loggedIn == false}" />
+				<h:commandButton action="login?faces-redirect=true" value="Login" />
+			</h:panelGroup>
+		</h:form>
+	</div>
 </html>
 

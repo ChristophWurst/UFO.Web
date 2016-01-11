@@ -9,9 +9,9 @@ import wea.ufo.model.Venue;
  */
 public interface UFOBusinessDelegate {
 
-    public List<Area> getAreas();
+	public List<Area> getAreas();
 
-    public List<Venue> getVenuesForArea(Area a);
+	public List<Venue> getVenuesForArea(Area a);
 
-    public boolean Login(String email, String password);
+	public boolean Login(String email, String password);
 }

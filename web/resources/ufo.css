@@ -21,6 +21,12 @@ body {
 #navigation-logo {
     height: 110px;
 }
+#header-login-name {
+	position: absolute;
+	top: 0px;
+	right:0px;
+	text-align: right;
+}
 #header-container {
     height: 40px;
     width: 100%;
@@ -45,6 +51,7 @@ body {
 #footer {
     height: 30px;
     vertical-align: central;
+    text-align: center;
 }
 
 #login-container {

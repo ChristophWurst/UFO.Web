@@ -17,34 +17,34 @@ import wea.ufo.util.ServiceLocator;
 @RequestScoped
 public class AreaData implements Serializable {
 
-    private static final Logger logger = Logger.getAnonymousLogger();
-    private final List<Area> areas;
-    private Area selectedArea;
+	private static final Logger logger = Logger.getAnonymousLogger();
+	private final List<Area> areas;
+	private Area selectedArea;
 
-    public AreaData() {
-        logger.log(Level.INFO, "AreaData created");
+	public AreaData() {
+		logger.log(Level.INFO, "AreaData created");
 
-        areas = ServiceLocator.getInstance().getUFOBusinessDelegate().getAreas();
+		areas = ServiceLocator.getInstance().getUFOBusinessDelegate().getAreas();
 
-        selectedArea = areas.isEmpty() ? null : areas.get(0);
-    }
+		selectedArea = areas.isEmpty() ? null : areas.get(0);
+	}
 
-    public Area getSelectedArea() {
-        return selectedArea;
-    }
+	public Area getSelectedArea() {
+		return selectedArea;
+	}
 
-    public void setSelectedArea(Area a) {
-        selectedArea = a;
-    }
+	public void setSelectedArea(Area a) {
+		selectedArea = a;
+	}
 
-    public void onAreaSelected(SelectEvent e) {
-        Area selected = (Area) e.getObject();
-        setSelectedArea(selected);
-        logger.log(Level.INFO, "Area selected: {0}", getSelectedArea().getName());
-    }
+	public void onAreaSelected(SelectEvent e) {
+		Area selected = (Area) e.getObject();
+		setSelectedArea(selected);
+		logger.log(Level.INFO, "Area selected: {0}", getSelectedArea().getName());
+	}
 
-    public List<Area> getAreas() {
-        return areas;
-    }
+	public List<Area> getAreas() {
+		return areas;
+	}
 
 }

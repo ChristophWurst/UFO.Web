@@ -24,51 +24,51 @@ import wea.ufo.util.ServiceLocator;
 @RequestScoped
 public class VenueData implements Serializable {
 
-    private static final Logger logger = Logger.getAnonymousLogger();
-    private List<Venue> venues;
-    private Area selectedArea;
-    private Venue selectedVenue;
+	private static final Logger logger = Logger.getAnonymousLogger();
+	private List<Venue> venues;
+	private Area selectedArea;
+	private Venue selectedVenue;
 
-    @ManagedProperty("#{areaData}")
-    private AreaData areaData;
+	@ManagedProperty("#{areaData}")
+	private AreaData areaData;
 
-    public VenueData() {
-        venues = new ArrayList<>();
-    }
+	public VenueData() {
+		venues = new ArrayList<>();
+	}
 
-    public void setAreaData(AreaData ad) {
-        areaData = ad;
-    }
+	public void setAreaData(AreaData ad) {
+		areaData = ad;
+	}
 
-    /**
-     * Get the value of selectedVenue
-     *
-     * @return the value of selectedVenue
-     */
-    public Venue getSelectedVenue() {
-        return selectedVenue;
-    }
+	/**
+	 * Get the value of selectedVenue
+	 *
+	 * @return the value of selectedVenue
+	 */
+	public Venue getSelectedVenue() {
+		return selectedVenue;
+	}
 
-    /**
-     * Set the value of selectedVenue
-     *
-     * @param selectedVenue new value of selectedVenue
-     */
-    public void setSelectedVenue(Venue selectedVenue) {
-        this.selectedVenue = selectedVenue;
-    }
+	/**
+	 * Set the value of selectedVenue
+	 *
+	 * @param selectedVenue new value of selectedVenue
+	 */
+	public void setSelectedVenue(Venue selectedVenue) {
+		this.selectedVenue = selectedVenue;
+	}
 
-    private void loadVenues(Area a) {
-        logger.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
-        venues = ServiceLocator.getInstance().getUFOBusinessDelegate().getVenuesForArea(a);
-    }
+	private void loadVenues(Area a) {
+		logger.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
+		venues = ServiceLocator.getInstance().getUFOBusinessDelegate().getVenuesForArea(a);
+	}
 
-    public List<Venue> getVenues() {
-        Area a = areaData.getSelectedArea();
-        if (a != selectedArea) {
-            selectedArea = a;
-            loadVenues(a);
-        }
-        return venues;
-    }
+	public List<Venue> getVenues() {
+		Area a = areaData.getSelectedArea();
+		if (a != selectedArea) {
+			selectedArea = a;
+			loadVenues(a);
+		}
+		return venues;
+	}
 }
