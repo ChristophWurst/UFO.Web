@@ -1,25 +1,29 @@
 body {
-    padding: 0px;
-    margin: 0px;
-    font-family: sans-serif;
+	padding: 0px;
+	margin: 0px;
+	font-family: sans-serif;
 }
 
 #header, #content, #footer {
-    position: relative;
-    width: 100%;
+	position: relative;
+	width: 100%;
 }
 
 #header {
-    height: 150px;
-    font-weight: 400;
-    background-color: lightgreen;
+	height: 150px;
+	font-weight: 400;
+	background-color: lightgreen;
 }
 #navigation-logo, #navigation-container {
-    position: relative;
-    width: 100%;
+	position: relative;
+	width: 100%;
 }
 #navigation-logo {
-    height: 110px;
+	height: 110px;
+	background-image: url('img/ufo.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
 }
 #header-login-name {
 	position: absolute;
@@ -28,36 +32,52 @@ body {
 	text-align: right;
 }
 #header-container {
-    height: 40px;
-    width: 100%;
+	height: 40px;
+	width: 100%;
 }
 .navigation-item {
-    position: relative;
-    height: 100%;
-    width: 220px;
-    margin-left: 7px;
-    float: left;
-    text-decoration: none;
-    background-color: yellow;
+	position: relative;
+	height: 100%;
+	width: 220px;
+	margin-left: 7px;
+	float: left;
+	text-decoration: none;
+	background-color: yellow;
 }
 .navigation-item:after {
-    clear: both;
+	clear: both;
 }
 
 #content {
-    min-height: 500px;
+	min-height: 500px;
+}
+#master1, #master2, #main-content {
+	position: relative;
+	float: left;
+}
+#master1 {
+	width: 20%;
+}
+#master2 {
+	width: 20%;
+}
+#master-detail {
+	width: 60%;
+}
+#master-detail:after {
+	clear: both;
 }
 
 #footer {
-    height: 30px;
-    vertical-align: central;
-    text-align: center;
+	height: 30px;
+	vertical-align: central;
+	text-align: center;
 }
 
 #login-container {
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    margin-left: -200px;
-    width: 400px;
+	position: absolute;
+	top: 70px;
+	left: 50%;
+	margin-left: -200px;
+	width: 400px;
 }
