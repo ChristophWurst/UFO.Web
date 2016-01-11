@@ -12,4 +12,6 @@ public interface UFOBusinessDelegate {
     public List<Area> getAreas();
 
     public List<Venue> getVenuesForArea(Area a);
+
+    public boolean Login(String email, String password);
 }

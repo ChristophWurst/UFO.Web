@@ -48,4 +48,13 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
         return venues.stream().filter(v -> v.getAreaId() == a.getId()).collect(Collectors.toList());
     }
 
+    @Override
+    public boolean Login(String email, String password) {
+        if (email.equals("user@example.com") && password.equals("12345")) {
+            // Login successful
+            return true;
+        }
+        return false;
+    }
+
 }
