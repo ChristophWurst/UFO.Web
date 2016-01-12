@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:49353/UFO.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/UFO/wsdl/localhost_49353/UFO.asmx.wsdl"/>
+    <system systemId="file:/home/christoph/workspace/UFO.Web/web/WEB-INF/wsdl/localhost_49353/UFO.asmx.wsdl" uri="src/conf/xml-resources/web-service-references/UFO.asmx/wsdl/UFO.asmx.wsdl"/>
 </catalog>

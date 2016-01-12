@@ -8,7 +8,12 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import org.primefaces.component.gmap.GMap;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 import wea.ufo.ws.*;
 import wea.ufo.util.ServiceLocator;
 
@@ -23,6 +28,7 @@ public class VenueData implements Serializable {
 	private List<Venue> venues;
 	private Area selectedArea;
 	private Venue selectedVenue;
+	private MapModel mapModel;
 
 	@ManagedProperty("#{areaData}")
 	private AreaData areaData;
@@ -51,6 +57,19 @@ public class VenueData implements Serializable {
 	 */
 	public void setSelectedVenue(Venue selectedVenue) {
 		this.selectedVenue = selectedVenue;
+		if (selectedVenue != null) {
+			mapModel = new DefaultMapModel();
+			logger.log(Level.INFO, "Settings venue mapModel to {0}, {1}", (Double.toString(selectedVenue.getLatitude())) + (Double.toString(selectedVenue.getLongitude())));
+			Marker m = new Marker(new LatLng(selectedVenue.getLatitude(), selectedVenue.getLongitude()));
+			mapModel.getMarkers().add(m);
+		} else {
+			mapModel = null;
+		}
+	}
+
+	public MapModel getMapModel() {
+		logger.log(Level.INFO, "now");
+		return mapModel;
 	}
 
 	public void onVenueSelected(SelectEvent e) {

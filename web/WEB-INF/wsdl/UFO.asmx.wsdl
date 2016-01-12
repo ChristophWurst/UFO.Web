@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ufo.fh-hagenberg.at/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://ufo.fh-hagenberg.at/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ufo.fh-hagenberg.at/">
+      <s:element name="CreateArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Artist">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Image" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Video" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CategoryId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountryId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateArtistResult" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreatePdfScheduleForSpectacleDay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="spectacleDay" type="tns:Spectacleday" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Spectacleday">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Day" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreatePdfScheduleForSpectacleDayResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateVenue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="venue" type="tns:Venue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Venue">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AreaId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateVenueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateVenueResult" type="tns:Venue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteArtistResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAreas">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAreasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAreasResult" type="tns:ArrayOfArea" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArea">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Area" nillable="true" type="tns:Area" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Area">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetArtistById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetArtistByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetArtistByIdResult" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetArtists">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetArtistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetArtistsResult" type="tns:ArrayOfArtist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArtist">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Artist" nillable="true" type="tns:Artist" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetArtistsForCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Category">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetArtistsForCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetArtistsForCategoryResult" type="tns:ArrayOfArtist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoriesResult" type="tns:ArrayOfCategory" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCategory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Category" nillable="true" type="tns:Category" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCategoryById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCategoryByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoryByIdResult" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountries">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCountriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountriesResult" type="tns:ArrayOfCountry" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCountry">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Country" nillable="true" type="tns:Country" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Country">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCountryById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="tns:Country" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountryByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountryByIdResult" type="tns:Country" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPerformanesForSpetacleDay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="day" type="tns:Spectacleday" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPerformanesForSpetacleDayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPerformanesForSpetacleDayResult" type="tns:ArrayOfPerformance" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPerformance">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Performance" nillable="true" type="tns:Performance" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Performance">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpectacledayTimeSlot" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ArtistId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VenueId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSpectacleDays">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSpectacleDaysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSpectacleDaysResult" type="tns:ArrayOfSpectacleday" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSpectacleday">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Spectacleday" nillable="true" type="tns:Spectacleday" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSpectacleDayTimeSlotsForSpectacleDay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="day" type="tns:Spectacleday" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSpectacleDayTimeSlotsForSpectacleDayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSpectacleDayTimeSlotsForSpectacleDayResult" type="tns:ArrayOfSpectacledayTimeSlot" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSpectacledayTimeSlot">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SpectacledayTimeSlot" nillable="true" type="tns:SpectacledayTimeSlot" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SpectacledayTimeSlot">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeSlotId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpectacledayId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimeSlot" type="tns:TimeSlot" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TimeSlot">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Start" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="End" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTimeSlots">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTimeSlotsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTimeSlotsResult" type="tns:ArrayOfTimeSlot" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTimeSlot">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TimeSlot" nillable="true" type="tns:TimeSlot" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetVenues">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVenuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVenuesResult" type="tns:ArrayOfVenue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfVenue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Venue" nillable="true" type="tns:Venue" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetVenuesForArea">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="area" type="tns:Area" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVenuesForAreaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVenuesForAreaResult" type="tns:ArrayOfVenue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateArtistResult" type="tns:Artist" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePerformances">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="spectacleDay" type="tns:Spectacleday" />
+            <s:element minOccurs="0" maxOccurs="1" name="performances" type="tns:ArrayOfPerformance" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePerformancesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateVenue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="venue" type="tns:Venue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateVenueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateVenueResult" type="tns:Venue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateArtist" />
+  </wsdl:message>
+  <wsdl:message name="CreateArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreatePdfScheduleForSpectacleDaySoapIn">
+    <wsdl:part name="parameters" element="tns:CreatePdfScheduleForSpectacleDay" />
+  </wsdl:message>
+  <wsdl:message name="CreatePdfScheduleForSpectacleDaySoapOut">
+    <wsdl:part name="parameters" element="tns:CreatePdfScheduleForSpectacleDayResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateVenueSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateVenue" />
+  </wsdl:message>
+  <wsdl:message name="CreateVenueSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateVenueResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteArtist" />
+  </wsdl:message>
+  <wsdl:message name="DeleteArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAreasSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAreas" />
+  </wsdl:message>
+  <wsdl:message name="GetAreasSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAreasResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArtistById" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArtistByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArtists" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArtistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistsForCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetArtistsForCategory" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistsForCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetArtistsForCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategories" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategoryById" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountries" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountryById" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPerformanesForSpetacleDaySoapIn">
+    <wsdl:part name="parameters" element="tns:GetPerformanesForSpetacleDay" />
+  </wsdl:message>
+  <wsdl:message name="GetPerformanesForSpetacleDaySoapOut">
+    <wsdl:part name="parameters" element="tns:GetPerformanesForSpetacleDayResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSpectacleDaysSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSpectacleDays" />
+  </wsdl:message>
+  <wsdl:message name="GetSpectacleDaysSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSpectacleDaysResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSpectacleDayTimeSlotsForSpectacleDaySoapIn">
+    <wsdl:part name="parameters" element="tns:GetSpectacleDayTimeSlotsForSpectacleDay" />
+  </wsdl:message>
+  <wsdl:message name="GetSpectacleDayTimeSlotsForSpectacleDaySoapOut">
+    <wsdl:part name="parameters" element="tns:GetSpectacleDayTimeSlotsForSpectacleDayResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTimeSlotsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTimeSlots" />
+  </wsdl:message>
+  <wsdl:message name="GetTimeSlotsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTimeSlotsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVenuesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVenues" />
+  </wsdl:message>
+  <wsdl:message name="GetVenuesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVenuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVenuesForAreaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVenuesForArea" />
+  </wsdl:message>
+  <wsdl:message name="GetVenuesForAreaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVenuesForAreaResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateArtist" />
+  </wsdl:message>
+  <wsdl:message name="UpdateArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePerformancesSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePerformances" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePerformancesSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePerformancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateVenueSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateVenue" />
+  </wsdl:message>
+  <wsdl:message name="UpdateVenueSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateVenueResponse" />
+  </wsdl:message>
+  <wsdl:portType name="UFOSoap">
+    <wsdl:operation name="CreateArtist">
+      <wsdl:input message="tns:CreateArtistSoapIn" />
+      <wsdl:output message="tns:CreateArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePdfScheduleForSpectacleDay">
+      <wsdl:input message="tns:CreatePdfScheduleForSpectacleDaySoapIn" />
+      <wsdl:output message="tns:CreatePdfScheduleForSpectacleDaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateVenue">
+      <wsdl:input message="tns:CreateVenueSoapIn" />
+      <wsdl:output message="tns:CreateVenueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArtist">
+      <wsdl:input message="tns:DeleteArtistSoapIn" />
+      <wsdl:output message="tns:DeleteArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAreas">
+      <wsdl:input message="tns:GetAreasSoapIn" />
+      <wsdl:output message="tns:GetAreasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistById">
+      <wsdl:input message="tns:GetArtistByIdSoapIn" />
+      <wsdl:output message="tns:GetArtistByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArtists">
+      <wsdl:input message="tns:GetArtistsSoapIn" />
+      <wsdl:output message="tns:GetArtistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistsForCategory">
+      <wsdl:input message="tns:GetArtistsForCategorySoapIn" />
+      <wsdl:output message="tns:GetArtistsForCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <wsdl:input message="tns:GetCategoriesSoapIn" />
+      <wsdl:output message="tns:GetCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryById">
+      <wsdl:input message="tns:GetCategoryByIdSoapIn" />
+      <wsdl:output message="tns:GetCategoryByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <wsdl:input message="tns:GetCountriesSoapIn" />
+      <wsdl:output message="tns:GetCountriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryById">
+      <wsdl:input message="tns:GetCountryByIdSoapIn" />
+      <wsdl:output message="tns:GetCountryByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPerformanesForSpetacleDay">
+      <wsdl:input message="tns:GetPerformanesForSpetacleDaySoapIn" />
+      <wsdl:output message="tns:GetPerformanesForSpetacleDaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpectacleDays">
+      <wsdl:input message="tns:GetSpectacleDaysSoapIn" />
+      <wsdl:output message="tns:GetSpectacleDaysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpectacleDayTimeSlotsForSpectacleDay">
+      <wsdl:input message="tns:GetSpectacleDayTimeSlotsForSpectacleDaySoapIn" />
+      <wsdl:output message="tns:GetSpectacleDayTimeSlotsForSpectacleDaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeSlots">
+      <wsdl:input message="tns:GetTimeSlotsSoapIn" />
+      <wsdl:output message="tns:GetTimeSlotsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVenues">
+      <wsdl:input message="tns:GetVenuesSoapIn" />
+      <wsdl:output message="tns:GetVenuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVenuesForArea">
+      <wsdl:input message="tns:GetVenuesForAreaSoapIn" />
+      <wsdl:output message="tns:GetVenuesForAreaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateArtist">
+      <wsdl:input message="tns:UpdateArtistSoapIn" />
+      <wsdl:output message="tns:UpdateArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerformances">
+      <wsdl:input message="tns:UpdatePerformancesSoapIn" />
+      <wsdl:output message="tns:UpdatePerformancesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVenue">
+      <wsdl:input message="tns:UpdateVenueSoapIn" />
+      <wsdl:output message="tns:UpdateVenueSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UFOSoap" type="tns:UFOSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateArtist">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/CreateArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePdfScheduleForSpectacleDay">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/CreatePdfScheduleForSpectacleDay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateVenue">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/CreateVenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArtist">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/DeleteArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAreas">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetAreas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistById">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetArtistById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtists">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetArtists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistsForCategory">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetArtistsForCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryById">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetCategoryById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetCountries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryById">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetCountryById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPerformanesForSpetacleDay">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetPerformanesForSpetacleDay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpectacleDays">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetSpectacleDays" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpectacleDayTimeSlotsForSpectacleDay">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetSpectacleDayTimeSlotsForSpectacleDay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeSlots">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetTimeSlots" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVenues">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetVenues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVenuesForArea">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetVenuesForArea" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateArtist">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/UpdateArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerformances">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/UpdatePerformances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVenue">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/UpdateVenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UFOSoap12" type="tns:UFOSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateArtist">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/CreateArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePdfScheduleForSpectacleDay">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/CreatePdfScheduleForSpectacleDay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateVenue">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/CreateVenue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArtist">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/DeleteArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAreas">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetAreas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistById">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetArtistById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtists">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetArtists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistsForCategory">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetArtistsForCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryById">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetCategoryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetCountries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryById">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetCountryById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPerformanesForSpetacleDay">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetPerformanesForSpetacleDay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpectacleDays">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetSpectacleDays" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpectacleDayTimeSlotsForSpectacleDay">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetSpectacleDayTimeSlotsForSpectacleDay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeSlots">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetTimeSlots" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVenues">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetVenues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVenuesForArea">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetVenuesForArea" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateArtist">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/UpdateArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerformances">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/UpdatePerformances" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVenue">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/UpdateVenue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UFO">
+    <wsdl:port name="UFOSoap" binding="tns:UFOSoap">
+      <soap:address location="http://localhost:49353/UFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UFOSoap12" binding="tns:UFOSoap12">
+      <soap12:address location="http://localhost:49353/UFO.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
