@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wea.ufo.data;
 
 import java.io.Serializable;
@@ -14,8 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
-import wea.ufo.model.Area;
-import wea.ufo.model.Venue;
+import wea.ufo.ws.*;
 import wea.ufo.util.ServiceLocator;
 
 /**
@@ -62,7 +56,7 @@ public class VenueData implements Serializable {
 	public void onVenueSelected(SelectEvent e) {
 		Venue selected = (Venue) e.getObject();
 		setSelectedVenue(selected);
-		logger.log(Level.INFO, "Venue selected: {0}", getSelectedVenue().getName());
+		logger.log(Level.INFO, "Venue selected: {0}", getSelectedVenue().getShortDescription());
 	}
 
 	private void loadVenues(Area a) {

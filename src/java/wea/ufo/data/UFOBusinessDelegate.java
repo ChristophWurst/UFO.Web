@@ -1,8 +1,7 @@
 package wea.ufo.data;
 
 import java.util.List;
-import wea.ufo.model.Area;
-import wea.ufo.model.Venue;
+import wea.ufo.ws.*;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>

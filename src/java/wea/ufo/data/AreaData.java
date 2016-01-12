@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
-import wea.ufo.model.*;
+import wea.ufo.ws.*;
 import wea.ufo.util.ServiceLocator;
 
 /**

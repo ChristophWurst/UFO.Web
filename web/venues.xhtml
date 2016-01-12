@@ -22,12 +22,12 @@
 						     selectionMode="single" rowKey="#{venue.id}">
 						<p:ajax event="rowSelect" listener="#{venueData.onVenueSelected}" update="@form"/>
 						<p:column>
-							<h:outputText id="name" value="#{venue.name}"/>
+							<h:outputText id="name" value="#{venue.description}"/>
 						</p:column>
 					</p:dataTable>
 				</div>
 				<div id="master-detail">
-					<h2><h:outputText value="#{venueData.selectedVenue.name}" /></h2>
+				    <h2><h:outputText value="#{venueData.selectedVenue.description}" /></h2>
 				</div>
 			</h:form>
 		</ui:define>
