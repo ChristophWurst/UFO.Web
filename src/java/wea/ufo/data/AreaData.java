@@ -18,12 +18,12 @@ import wea.ufo.util.ServiceLocator;
 @Named("areaData")
 public class AreaData implements Serializable {
 
-	private static final Logger logger = Logger.getAnonymousLogger();
+	private static final Logger LOG = Logger.getLogger(AreaData.class.getName());
 	private List<Area> areas;
 	private Area selectedArea;
 
 	public AreaData() {
-		logger.log(Level.INFO, "AreaData created");
+		LOG.log(Level.INFO, "AreaData created");
 	}
 
 	@PostConstruct
@@ -43,7 +43,7 @@ public class AreaData implements Serializable {
 	public void onAreaSelected(SelectEvent e) {
 		Area selected = (Area) e.getObject();
 		setSelectedArea(selected);
-		logger.log(Level.INFO, "Area selected: {0}", getSelectedArea().getName());
+		LOG.log(Level.INFO, "Area selected: {0}", getSelectedArea().getName());
 	}
 
 	public List<Area> getAreas() {

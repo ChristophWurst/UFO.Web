@@ -24,7 +24,7 @@ import wea.ufo.util.ServiceLocator;
 @Named("venueData")
 public class VenueData implements Serializable {
 
-	private static final Logger logger = Logger.getAnonymousLogger();
+	private static final Logger LOG = Logger.getLogger(VenueData.class.getName());
 	private List<Venue> venues;
 	private Area selectedArea;
 	private Venue selectedVenue;
@@ -59,7 +59,7 @@ public class VenueData implements Serializable {
 		this.selectedVenue = selectedVenue;
 		if (selectedVenue != null) {
 			mapModel = new DefaultMapModel();
-			logger.log(Level.INFO, "Settings venue mapModel to {0}, {1}", (Double.toString(selectedVenue.getLatitude())) + (Double.toString(selectedVenue.getLongitude())));
+			LOG.log(Level.INFO, "Settings venue mapModel to {0}, {1}", (Double.toString(selectedVenue.getLatitude())) + (Double.toString(selectedVenue.getLongitude())));
 			Marker m = new Marker(new LatLng(selectedVenue.getLatitude(), selectedVenue.getLongitude()));
 			mapModel.getMarkers().add(m);
 		} else {
@@ -74,11 +74,11 @@ public class VenueData implements Serializable {
 	public void onVenueSelected(SelectEvent e) {
 		Venue selected = (Venue) e.getObject();
 		setSelectedVenue(selected);
-		logger.log(Level.INFO, "Venue selected: {0}", getSelectedVenue().getShortDescription());
+		LOG.log(Level.INFO, "Venue selected: {0}", getSelectedVenue().getShortDescription());
 	}
 
 	private void loadVenues(Area a) {
-		logger.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
+		LOG.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
 		venues = ServiceLocator.getInstance().getUFOBusinessDelegate().getVenuesForArea(a);
 		if (!venues.isEmpty()) {
 			setSelectedVenue(venues.get(0));

@@ -22,7 +22,7 @@ import org.primefaces.model.DefaultDashboardModel;
 @Named("scheduleData")
 public class ScheduleData implements Serializable {
 
-	private static final Logger logger = Logger.getAnonymousLogger();
+	private static final Logger LOG = Logger.getLogger(ScheduleData.class.getName());
 	private Application app;
 	private DashboardModel model;
 	private Dashboard dashboard;
@@ -47,7 +47,7 @@ public class ScheduleData implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		logger.log(Level.INFO, "initializing scheduleData");
+		LOG.log(Level.INFO, "initializing scheduleData");
 
 		model = new DefaultDashboardModel();
 
@@ -69,7 +69,7 @@ public class ScheduleData implements Serializable {
 	}
 
 	private void loadData() {
-		logger.log(Level.INFO, "loading schedule data");
+		LOG.log(Level.INFO, "loading schedule data");
 
 		dashboard.getChildren().clear();
 		FacesContext fc = FacesContext.getCurrentInstance();
@@ -91,7 +91,7 @@ public class ScheduleData implements Serializable {
 	 * @return the value of dashboard
 	 */
 	public Dashboard getDashboard() {
-		logger.log(Level.INFO, "get db");
+		LOG.log(Level.INFO, "get db");
 		return dashboard;
 	}
 
@@ -101,7 +101,7 @@ public class ScheduleData implements Serializable {
 	 * @param dashboard new value of dashboard
 	 */
 	public void setDashboard(Dashboard dashboard) {
-		logger.log(Level.INFO, "set db");
+		LOG.log(Level.INFO, "set db");
 		this.dashboard = dashboard;
 		loadData();
 	}
