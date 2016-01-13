@@ -10,7 +10,7 @@
 			<h:form>
 				<div id="master1">
 					<p:dataTable id="areaTable" var="area" value="#{areaData.areas}"
-						     selectionMode="single" rowKey="#{area.id}">
+						     selectionMode="single" rowKey="#{area.id}" selection="#{areaData.selectedArea}">
 						<p:ajax event="rowSelect" listener="#{areaData.onAreaSelected}" update="@form"/>
 						<p:column>
 							<h:outputText id="name" value="#{area.name}"/>
