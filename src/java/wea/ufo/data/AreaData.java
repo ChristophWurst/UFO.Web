@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
 import org.primefaces.event.SelectEvent;
 import wea.ufo.ws.*;
 import wea.ufo.util.ServiceLocator;
@@ -13,8 +13,8 @@ import wea.ufo.util.ServiceLocator;
 /**
  * @author Christoph Wurst
  */
-@ManagedBean(name = "areaData")
 @RequestScoped
+@Named("areaData")
 public class AreaData implements Serializable {
 
 	private static final Logger logger = Logger.getAnonymousLogger();

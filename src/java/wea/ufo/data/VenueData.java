@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import org.primefaces.component.gmap.GMap;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -20,8 +20,8 @@ import wea.ufo.util.ServiceLocator;
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
-@ManagedBean(name = "venueData")
 @RequestScoped
+@Named("venueData")
 public class VenueData implements Serializable {
 
 	private static final Logger logger = Logger.getAnonymousLogger();
@@ -30,7 +30,7 @@ public class VenueData implements Serializable {
 	private Venue selectedVenue;
 	private MapModel mapModel;
 
-	@ManagedProperty("#{areaData}")
+	@Inject
 	private AreaData areaData;
 
 	public VenueData() {
@@ -68,7 +68,6 @@ public class VenueData implements Serializable {
 	}
 
 	public MapModel getMapModel() {
-		logger.log(Level.INFO, "now");
 		return mapModel;
 	}
 
@@ -81,6 +80,9 @@ public class VenueData implements Serializable {
 	private void loadVenues(Area a) {
 		logger.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
 		venues = ServiceLocator.getInstance().getUFOBusinessDelegate().getVenuesForArea(a);
+		if (!venues.isEmpty()) {
+			setSelectedVenue(venues.get(0));
+		}
 	}
 
 	public List<Venue> getVenues() {

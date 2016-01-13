@@ -3,6 +3,7 @@ package wea.ufo.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import wea.ufo.ws.*;
 
@@ -27,8 +28,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 		a2.setName("Rathausplatz");
 		areas.add(a2);
 
-		Random rand = new Random();
-		areas.stream().forEach((a) -> {
+		areas.stream().forEach((Area a) -> {
 			for (int i = 0; i < 20; i++) {
 				Venue v = new Venue();
 				v.setAreaId(a.getId());
