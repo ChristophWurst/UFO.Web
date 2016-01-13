@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Named;
-import javax.faces.bean.ManagedProperty;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
@@ -20,8 +19,8 @@ import wea.ufo.util.ServiceLocator;
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
+@Named
 @RequestScoped
-@Named("venueData")
 public class VenueData implements Serializable {
 
 	private static final Logger LOG = Logger.getLogger(VenueData.class.getName());

@@ -29,6 +29,16 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
 	}
 
 	@Override
+	public List<Category> getCategories() {
+		return ws.getCategories().getCategory();
+	}
+
+	@Override
+	public List<Artist> getArtistsForCategory(Category cat) {
+		return ws.getArtistsForCategory(cat).getArtist();
+	}
+
+	@Override
 	public boolean Login(String email, String password) {
 		return ws.login(email, password);
 	}

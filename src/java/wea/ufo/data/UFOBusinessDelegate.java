@@ -12,5 +12,10 @@ public interface UFOBusinessDelegate {
 
 	public List<Venue> getVenuesForArea(Area a);
 
+	public List<Category> getCategories();
+
+	public List<Artist> getArtistsForCategory(Category cat);
+
 	public boolean Login(String email, String password);
+
 }
