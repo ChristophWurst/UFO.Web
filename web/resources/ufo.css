@@ -3,21 +3,9 @@ body {
 	padding-bottom: 20px;
 }
 
-#master1, #master2, #master-detail {
-	position: relative;
-	float: left;
-}
-#master1 {
-	width: 20%;
-}
-#master2 {
-	width: 20%;
-}
-#master-detail {
-	width: 60%;
-}
-#master-detail:after {
-	clear: both;
+.col-master {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }
 
 #login-container {

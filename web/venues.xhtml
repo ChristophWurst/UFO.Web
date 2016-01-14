@@ -9,7 +9,7 @@
 		<ui:define name="content">
 			<h:form>
 				<div class="container row">
-					<div class="col-md-3">
+					<div class="col-md-3 col-master">
 						<p:dataTable id="areaTable" var="area" value="#{areaData.areas}"
 							     selectionMode="single" rowKey="#{area.id}" selection="#{areaData.selectedArea}">
 							<p:ajax event="rowSelect" listener="#{areaData.onAreaSelected}" update="@form"/>
@@ -18,7 +18,7 @@
 							</p:column>
 						</p:dataTable>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 col-master">
 						<p:dataTable id="venueTable" var="venue" value="#{venueData.venues}"
 							     selectionMode="single" rowKey="#{venue.id}">
 							<p:ajax event="rowSelect" listener="#{venueData.onVenueSelected}" update="@form"/>
