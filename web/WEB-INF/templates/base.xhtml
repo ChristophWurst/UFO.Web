@@ -11,14 +11,15 @@
 		<h:outputStylesheet name="ufo.css"/>
 		<link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
 		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"></link>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"></link>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	</h:head>
 	<h:body>
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/WEB-INF/templates/header.xhtml"/>
-			</ui:insert>
-		</div>
-		<div id="content">
+		<ui:insert name="header">
+			<ui:include src="/WEB-INF/templates/header.xhtml"/>
+		</ui:insert>
+		<div class="container">
 			<ui:insert name="content">
 				<p:layout style="min-width:400px;min-height:200px;">
 					<p:layoutUnit position="west" size="200">
@@ -29,10 +30,13 @@
 					</p:layoutUnit>
 				</p:layout>    
 			</ui:insert>
-		</div>
-		<div id="footer">
-			WEA5 – Christoph Wurst 2016
-		</div>
+
+			<hr></hr>
+
+			<footer>
+				<p>2015 – 2016 Christoph Wurst</p>
+			</footer>
+		</div> <!-- /container -->
 	</h:body>
 </html>
 

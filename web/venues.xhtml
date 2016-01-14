@@ -8,27 +8,29 @@
 		<ui:define name="title">Venues</ui:define>
 		<ui:define name="content">
 			<h:form>
-				<div id="master1">
-					<p:dataTable id="areaTable" var="area" value="#{areaData.areas}"
-						     selectionMode="single" rowKey="#{area.id}" selection="#{areaData.selectedArea}">
-						<p:ajax event="rowSelect" listener="#{areaData.onAreaSelected}" update="@form"/>
-						<p:column>
-							<h:outputText id="name" value="#{area.name}"/>
-						</p:column>
-					</p:dataTable>
-				</div>
-				<div id="master2">
-					<p:dataTable id="venueTable" var="venue" value="#{venueData.venues}"
-						     selectionMode="single" rowKey="#{venue.id}">
-						<p:ajax event="rowSelect" listener="#{venueData.onVenueSelected}" update="@form"/>
-						<p:column>
-							<h:outputText id="name" value="#{venue.description}"/>
-						</p:column>
-					</p:dataTable>
-				</div>
-				<div id="master-detail">
-					<h2><h:outputText value="#{venueData.selectedVenue.description}" /></h2>
-					<p:gmap model="#{venueData.mapModel}" center="48.2950437, 14.2573657" zoom="12" type="HYBRID" style="width:100%;height:400px" />
+				<div class="container row">
+					<div class="col-md-3">
+						<p:dataTable id="areaTable" var="area" value="#{areaData.areas}"
+							     selectionMode="single" rowKey="#{area.id}" selection="#{areaData.selectedArea}">
+							<p:ajax event="rowSelect" listener="#{areaData.onAreaSelected}" update="@form"/>
+							<p:column>
+								<h:outputText id="name" value="#{area.name}"/>
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div class="col-md-3">
+						<p:dataTable id="venueTable" var="venue" value="#{venueData.venues}"
+							     selectionMode="single" rowKey="#{venue.id}">
+							<p:ajax event="rowSelect" listener="#{venueData.onVenueSelected}" update="@form"/>
+							<p:column>
+								<h:outputText id="name" value="#{venue.description}"/>
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div class="col-md-6">
+						<h2><h:outputText value="#{venueData.selectedVenue.description}" /></h2>
+						<p:gmap model="#{venueData.mapModel}" center="48.2950437, 14.2573657" zoom="12" type="HYBRID" style="width:100%;height:400px" />
+					</div>
 				</div>
 			</h:form>
 		</ui:define>

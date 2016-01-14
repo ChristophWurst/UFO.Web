@@ -8,28 +8,30 @@
 		<ui:define name="title">Artists</ui:define>
 		<ui:define name="content">
 			<h:form>
-				<div id="master1">
-					<p:dataTable id="categoryTable" var="category" value="#{categoryData.categories}"
-						     selectionMode="single" rowKey="#{category.id}" selection="#{categoryData.selectedCategory}">
-						<p:ajax event="rowSelect" listener="#{categoryData.onCategorySelected}" update="@form"/>
-						<p:column>
-							<h:outputText id="name" value="#{category.description}"/>
-						</p:column>
-					</p:dataTable>
-				</div>
-				<div id="master2">
-					<p:dataTable id="artistTable" var="artist" value="#{artistData.artists}"
-						     selectionMode="single" rowKey="#{artist.id}" selection="#{artistData.selectedArtist}">
-						<p:ajax event="rowSelect" listener="#{artistData.onArtistSelected}" update="@form"/>
-						<p:column>
-							<h:outputText id="name" value="#{artist.name}"/>
-						</p:column>
-					</p:dataTable>
-				</div>
-				<div id="master-detail">
-					<h2><h:outputText value="#{artistData.selectedArtist.name}" /></h2>
-					<p:graphicImage value="http://www.winzerhof-wurst.at/ufo/#{artistData.selectedArtist.image}"
-							rendered="#{artistData.selectedArtist.image != null}"/>
+				<div class="container row">
+					<div class="col-md-3">
+						<p:dataTable id="categoryTable" var="category" value="#{categoryData.categories}"
+							     selectionMode="single" rowKey="#{category.id}" selection="#{categoryData.selectedCategory}">
+							<p:ajax event="rowSelect" listener="#{categoryData.onCategorySelected}" update="@form"/>
+							<p:column>
+								<h:outputText id="name" value="#{category.description}"/>
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div class="col-md-3">
+						<p:dataTable id="artistTable" var="artist" value="#{artistData.artists}"
+							     selectionMode="single" rowKey="#{artist.id}" selection="#{artistData.selectedArtist}">
+							<p:ajax event="rowSelect" listener="#{artistData.onArtistSelected}" update="@form"/>
+							<p:column>
+								<h:outputText id="name" value="#{artist.name}"/>
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div class="col-md-6">
+						<h2><h:outputText value="#{artistData.selectedArtist.name}" /></h2>
+						<p:graphicImage value="http://www.winzerhof-wurst.at/ufo/#{artistData.selectedArtist.image}"
+								rendered="#{artistData.selectedArtist.image != null}"/>
+					</div>
 				</div>
 			</h:form>
 		</ui:define>
