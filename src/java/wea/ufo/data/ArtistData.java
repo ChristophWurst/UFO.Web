@@ -1,10 +1,11 @@
 package wea.ufo.data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
@@ -16,8 +17,8 @@ import wea.ufo.ws.Category;
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
 @Named
-@RequestScoped
-public class ArtistData {
+@ViewScoped
+public class ArtistData implements Serializable {
 
 	private static final Logger LOG = Logger.getLogger(ArtistData.class.getName());
 	private List<Artist> artists;

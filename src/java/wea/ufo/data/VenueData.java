@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
@@ -20,7 +20,7 @@ import wea.ufo.util.ServiceLocator;
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class VenueData implements Serializable {
 
 	private static final Logger LOG = Logger.getLogger(VenueData.class.getName());
@@ -91,5 +91,16 @@ public class VenueData implements Serializable {
 			loadVenues(a);
 		}
 		return venues;
+	}
+	
+	public List<Venue> getVenuesForArea(Area a) {
+		List<Venue> venue = new ArrayList<>();
+		Venue ve = new Venue();
+		ve.setDescription("Area a");
+		venue.add(ve);
+		ve = new Venue();
+		ve.setDescription("Area b");
+		venue.add(ve);
+		return venue;
 	}
 }

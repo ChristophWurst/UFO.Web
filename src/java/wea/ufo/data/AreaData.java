@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import org.primefaces.event.SelectEvent;
 import wea.ufo.ws.*;
 import wea.ufo.util.ServiceLocator;
@@ -14,7 +14,7 @@ import wea.ufo.util.ServiceLocator;
 /**
  * @author Christoph Wurst
  */
-@RequestScoped
+@ViewScoped
 @Named("areaData")
 public class AreaData implements Serializable {
 
