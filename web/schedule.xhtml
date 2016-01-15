@@ -3,14 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <ui:composition template="/WEB-INF/templates/base.xhtml">
-        <ui:define name="title">Artists</ui:define>
-        <ui:define name="content">
-		<h:form>
-			<p:dashboard id="schedule" model="#{scheduleData.model}" binding="#{scheduleData.dashboard}" />
-		</h:form>
-        </ui:define>
-    </ui:composition>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<ui:composition template="/WEB-INF/templates/base.xhtml">
+		<ui:define name="title">Artists</ui:define>
+		<ui:define name="content">
+			<p:tabView value="#{scheduleData.spectacleDays}"
+				   cache="true"
+				   var="spectacleDay"
+				   dynamic="true">
+				<p:tab title="#{spectacleDay.label}">
+					<div id="schedule">
+						<c:forEach var="area" items="#{scheduleData.areas}">
+							<div class="row header">
+								<div class="col-md-2">#{area.name}</div>
+								<c:forEach var="timeSlot" items="#{scheduleData.timeSlots}">
+									<div class="col-md-1 text-center">#{timeSlot.label}</div>
+								</c:forEach>
+							</div>
+							<c:forEach var="venue" items="#{area.venues}">
+								<div class="row">
+									<div class="col-md-2">#{venue.name}</div>
+									<div class="col-md-1 text-center">lorem</div>
+									<div class="col-md-1 text-center">ipsum</div>
+									<div class="col-md-1 text-center">hipster</div>
+									<div class="col-md-1 text-center">longboard</div>
+									<div class="col-md-1 text-center">javascript</div>
+									<div class="col-md-1 text-center">ferdinand</div>
+									<div class="col-md-1 text-center">morgan</div>
+									<div class="col-md-1 text-center">freeman</div>
+									<div class="col-md-1 text-center">fritz</div>
+								</div>
+							</c:forEach>
+						</c:forEach>
+					</div>
+				</p:tab>
+			</p:tabView>
+		</ui:define>
+	</ui:composition>
 </html>
 

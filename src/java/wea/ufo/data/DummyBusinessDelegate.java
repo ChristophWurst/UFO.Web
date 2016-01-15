@@ -1,9 +1,13 @@
 package wea.ufo.data;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import javax.xml.datatype.XMLGregorianCalendar;
 import wea.ufo.ws.*;
 
 /**
@@ -15,6 +19,8 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 	private final List<Venue> venues;
 	private final List<Category> categories;
 	private final List<Artist> artists;
+	private List<TimeSlot> timeSlots;
+	private List<Spectacleday> spectacleDays;
 
 	public DummyBusinessDelegate() {
 		areas = new ArrayList<>();
@@ -30,7 +36,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 		areas.add(a2);
 
 		areas.stream().forEach((Area a) -> {
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < 8; i++) {
 				Venue v = new Venue();
 				v.setAreaId(a.getId());
 				v.setId(i);
@@ -51,7 +57,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 			c.setDescription(cat);
 			categories.add(c);
 		}
-		
+
 		artists = new ArrayList<>();
 		Random rand = new Random();
 		categories.stream().forEach((c) -> {
@@ -64,6 +70,23 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 				artists.add(a);
 			}
 		});
+
+		timeSlots = new ArrayList<>();
+		for (int tst = 15; tst <= 23; tst++) {
+			TimeSlot ts = new TimeSlot();
+			ts.setStart(tst);
+			ts.setEnd(tst + 1);
+			timeSlots.add(ts);
+		}
+
+		spectacleDays = new ArrayList();
+		for (int z = 0; z < 4; z++) {
+			Spectacleday sd = new Spectacleday();
+			ZonedDateTime zdt = ZonedDateTime.now();
+			GregorianCalendar gc = GregorianCalendar.from(zdt);
+			sd.setDay(new XMLGregorianCalendarImpl(gc));
+			spectacleDays.add(sd);
+		}
 	}
 
 	@Override
@@ -84,6 +107,16 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 	@Override
 	public List<Artist> getArtistsForCategory(Category cat) {
 		return artists.stream().filter(a -> a.getCategoryId() == cat.getId()).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<TimeSlot> getTimeSlots() {
+		return timeSlots;
+	}
+
+	@Override
+	public List<Spectacleday> getSpectacleDays() {
+		return spectacleDays;
 	}
 
 	@Override

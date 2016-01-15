@@ -16,6 +16,10 @@ public interface UFOBusinessDelegate {
 
 	public List<Artist> getArtistsForCategory(Category cat);
 
+	public List<TimeSlot> getTimeSlots();
+
+	public List<Spectacleday> getSpectacleDays();
+
 	public boolean Login(String email, String password);
 
 }

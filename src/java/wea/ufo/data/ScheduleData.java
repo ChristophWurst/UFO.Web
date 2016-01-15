@@ -1,109 +1,111 @@
 package wea.ufo.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.Application;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
-import org.primefaces.component.dashboard.Dashboard;
-import org.primefaces.component.panel.Panel;
-import org.primefaces.model.DashboardModel;
-import org.primefaces.model.DefaultDashboardColumn;
-import org.primefaces.model.DefaultDashboardModel;
+import wea.ufo.model.ScheduleArea;
+import wea.ufo.model.ScheduleSpectacleDay;
+import wea.ufo.model.ScheduleTimeSlot;
+import wea.ufo.model.ScheduleVenue;
+import wea.ufo.util.ServiceLocator;
+import wea.ufo.ws.Area;
+import wea.ufo.ws.Spectacleday;
+import wea.ufo.ws.TimeSlot;
+import wea.ufo.ws.Venue;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
+@Named
 @RequestScoped
-@Named("scheduleData")
 public class ScheduleData implements Serializable {
 
 	private static final Logger LOG = Logger.getLogger(ScheduleData.class.getName());
 	private Application app;
-	private DashboardModel model;
-	private Dashboard dashboard;
-
-	/**
-	 * Get the value of model
-	 *
-	 * @return the value of model
-	 */
-	public DashboardModel getModel() {
-		return model;
-	}
-
-	/**
-	 * Set the value of model
-	 *
-	 * @param model new value of model
-	 */
-	public void setModel(DashboardModel model) {
-		this.model = model;
-	}
+	private List<ScheduleSpectacleDay> spectacleDays;
+	private List<ScheduleArea> areas;
+	private List<ScheduleTimeSlot> timeSlots;
 
 	@PostConstruct
 	public void init() {
 		LOG.log(Level.INFO, "initializing scheduleData");
-
-		model = new DefaultDashboardModel();
-
-		for (int i = 1; i <= 7; i++) {
-			DefaultDashboardColumn col = new DefaultDashboardColumn();
-			col.addWidget("p" + i + "-" + 1);
-			col.addWidget("p" + i + "-" + 2);
-			col.addWidget("p" + i + "-" + 3);
-			model.addColumn(col);
-		}
-
-		FacesContext fc = FacesContext.getCurrentInstance();
-		app = fc.getApplication();
-		dashboard = (Dashboard) app.createComponent(fc, "org.primefaces.component.Dashboard", "org.primefaces.component.DashboardRenderer");
-		dashboard.setId("schedule");
-		dashboard.setModel(getModel());
-
 		loadData();
 	}
 
 	private void loadData() {
 		LOG.log(Level.INFO, "loading schedule data");
+		UFOBusinessDelegate bd = ServiceLocator.getInstance().getUFOBusinessDelegate();
 
-		dashboard.getChildren().clear();
-		FacesContext fc = FacesContext.getCurrentInstance();
+		spectacleDays = new ArrayList<>();
+		List<Spectacleday> days = bd.getSpectacleDays();
+		days.stream().map((Spectacleday d) -> {
+			return new ScheduleSpectacleDay(d);
+		}).forEach(ssd -> {
+			spectacleDays.add(ssd);
+		});
 
-		for (int i = 1; i <= 7; i++) {
-			for (int y = 1; y <= 3; y++) {
-				Panel pan = (Panel) app.createComponent(fc, "org.primefaces.component.Panel", "org.primefaces.component.PanelRenderer");
-				pan.setId("p" + i + "-" + y);
-				pan.setHeader("p" + i + "-" + y);
-				pan.setClosable(true);
-				dashboard.getChildren().add(pan);
-			}
-		}
+		areas = new ArrayList<>();
+		List<Area> wsAreas = bd.getAreas();
+		wsAreas.stream().map((a) -> {
+			ScheduleArea sa = new ScheduleArea(a);
+			List<Venue> wsVenues = bd.getVenuesForArea(a);
+			List<ScheduleVenue> venues = new ArrayList<>();
+			wsVenues.stream().forEach((v) -> {
+				venues.add(new ScheduleVenue(v));
+			});
+			sa.setVenues(venues);
+			return sa;
+		}).forEach((sa) -> {
+			areas.add(sa);
+		});
+
+		timeSlots = new ArrayList<>();
+		List<TimeSlot> ts = bd.getTimeSlots();
+		ts.stream().forEach((t) -> {
+			timeSlots.add(new ScheduleTimeSlot(t));
+		});
 	}
 
 	/**
-	 * Get the value of dashboard
+	 * Get the value of spectacleDays
 	 *
-	 * @return the value of dashboard
+	 * @return the value of spectacleDays
 	 */
-	public Dashboard getDashboard() {
-		LOG.log(Level.INFO, "get db");
-		return dashboard;
+	public List<ScheduleSpectacleDay> getSpectacleDays() {
+		return spectacleDays;
 	}
 
 	/**
-	 * Set the value of dashboard
+	 * Get the value of areas
 	 *
-	 * @param dashboard new value of dashboard
+	 * @return the value of areas
 	 */
-	public void setDashboard(Dashboard dashboard) {
-		LOG.log(Level.INFO, "set db");
-		this.dashboard = dashboard;
-		loadData();
+	public List<ScheduleArea> getAreas() {
+		return areas;
+	}
+
+	/**
+	 * Set the value of areas
+	 *
+	 * @param areas new value of areas
+	 */
+	public void setAreas(List<ScheduleArea> areas) {
+		this.areas = areas;
+	}
+
+	/**
+	 * Get the value of timeSlots
+	 *
+	 * @return the value of timeSlots
+	 */
+	public List<ScheduleTimeSlot> getTimeSlots() {
+		return timeSlots;
 	}
 
 }

@@ -17,7 +17,7 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
 		UFO ufo = new UFO();
 		ws = ufo.getUFOSoap();
 	}
-	
+
 	@Override
 	public List<Area> getAreas() {
 		return ws.getAreas().getArea();
@@ -39,8 +39,18 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
 	}
 
 	@Override
+	public List<TimeSlot> getTimeSlots() {
+		return ws.getTimeSlots().getTimeSlot();
+	}
+
+	@Override
+	public List<Spectacleday> getSpectacleDays() {
+		return ws.getSpectacleDays().getSpectacleday();
+	}
+
+	@Override
 	public boolean Login(String email, String password) {
 		return ws.login(email, password);
 	}
-	
+
 }

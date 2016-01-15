@@ -8,6 +8,16 @@ body {
 	padding-right: 0px !important;
 }
 
+#schedule .row div {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+/* Header top, left */
+#schedule .row.header div, #schedule .row div:first-child {
+	background-color: lightgray;
+}
+
 #login-container {
 	position: absolute;
 	top: 70px;
