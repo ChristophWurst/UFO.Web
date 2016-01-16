@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 import wea.ufo.ws.*;
@@ -21,6 +22,18 @@ public class AreaData implements Serializable {
 	private static final Logger LOG = Logger.getLogger(AreaData.class.getName());
 	private List<Area> areas;
 	private Area selectedArea;
+	
+	@Inject
+	transient private ServiceLocator serviceLocator;
+
+	/**
+	 * Set the value of serviceLocator
+	 *
+	 * @param serviceLocator new value of serviceLocator
+	 */
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
 
 	public AreaData() {
 		LOG.log(Level.INFO, "AreaData created");
@@ -28,7 +41,7 @@ public class AreaData implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		areas = ServiceLocator.getInstance().getUFOBusinessDelegate().getAreas();
+		areas = serviceLocator.getUFOBusinessDelegate().getAreas();
 		selectedArea = areas.isEmpty() ? null : areas.get(0);
 	}
 

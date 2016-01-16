@@ -30,6 +30,18 @@ public class VenueData implements Serializable {
 	private MapModel mapModel;
 
 	@Inject
+	transient private ServiceLocator serviceLocator;
+
+	/**
+	 * Set the value of serviceLocator
+	 *
+	 * @param serviceLocator new value of serviceLocator
+	 */
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
+
+	@Inject
 	private AreaData areaData;
 
 	public VenueData() {
@@ -78,7 +90,7 @@ public class VenueData implements Serializable {
 
 	private void loadVenues(Area a) {
 		LOG.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
-		venues = ServiceLocator.getInstance().getUFOBusinessDelegate().getVenuesForArea(a);
+		venues = serviceLocator.getUFOBusinessDelegate().getVenuesForArea(a);
 		if (!venues.isEmpty()) {
 			setSelectedVenue(venues.get(0));
 		}
@@ -92,7 +104,7 @@ public class VenueData implements Serializable {
 		}
 		return venues;
 	}
-	
+
 	public List<Venue> getVenuesForArea(Area a) {
 		List<Venue> venue = new ArrayList<>();
 		Venue ve = new Venue();

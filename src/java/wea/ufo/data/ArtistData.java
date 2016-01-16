@@ -26,6 +26,17 @@ public class ArtistData implements Serializable {
 	private Category selectedCategory;
 	@Inject
 	private CategoryData categoryData;
+	@Inject
+	transient private ServiceLocator serviceLocator;
+
+	/**
+	 * Set the value of serviceLocator
+	 *
+	 * @param serviceLocator new value of serviceLocator
+	 */
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
 
 	public ArtistData() {
 		LOG.log(Level.INFO, "created artistData");
@@ -46,7 +57,7 @@ public class ArtistData implements Serializable {
 		if (cat != selectedCategory) {
 			selectedCategory = cat;
 			LOG.log(Level.INFO, "loading artists for category <{0}> ", cat.getDescription());
-			artists = ServiceLocator.getInstance().getUFOBusinessDelegate().getArtistsForCategory(cat);
+			artists = serviceLocator.getUFOBusinessDelegate().getArtistsForCategory(cat);
 			if (!artists.isEmpty()) {
 				setSelectedArtist(artists.get(0));
 			}

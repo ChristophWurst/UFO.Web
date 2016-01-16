@@ -7,19 +7,31 @@ import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import wea.ufo.util.ServiceLocator;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
+@Named
 @SessionScoped
-@Named("userData")
 public class UserData implements Serializable {
 
 	private static final Logger LOG = Logger.getLogger(UserData.class.getName());
 	private String email;
 	private String loginEmail;
 	private String loginPassword;
+	@Inject
+	transient private ServiceLocator serviceLocator;
+
+	/**
+	 * Set the value of serviceLocator
+	 *
+	 * @param serviceLocator new value of serviceLocator
+	 */
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
 
 	/**
 	 * Get the value of email
@@ -81,7 +93,7 @@ public class UserData implements Serializable {
 
 	public String login() {
 		LOG.log(Level.INFO, "User <{0}> tries to log in", loginEmail);
-		boolean result = ServiceLocator.getInstance().getUFOBusinessDelegate().Login(loginEmail, loginPassword);
+		boolean result = serviceLocator.getUFOBusinessDelegate().Login(loginEmail, loginPassword);
 		if (!result) {
 			LOG.log(Level.WARNING, "Invaild credentials for user <{0}>", loginEmail);
 			FacesContext context = FacesContext.getCurrentInstance();

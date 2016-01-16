@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.TabChangeEvent;
 import wea.ufo.model.ScheduleArea;
@@ -42,6 +43,17 @@ public class ScheduleData implements Serializable {
 	private List<ScheduleTimeSlot> timeSlots;
 	private List<SpectacledayTimeSlot> spectacleDayTimeSlots;
 	private List<Artist> artists;
+	@Inject
+	transient private ServiceLocator serviceLocator;
+
+	/**
+	 * Set the value of serviceLocator
+	 *
+	 * @param serviceLocator new value of serviceLocator
+	 */
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -54,7 +66,7 @@ public class ScheduleData implements Serializable {
 
 	private void loadData() {
 		LOG.log(Level.INFO, "loading schedule data");
-		UFOBusinessDelegate bd = ServiceLocator.getInstance().getUFOBusinessDelegate();
+		UFOBusinessDelegate bd = serviceLocator.getUFOBusinessDelegate();
 
 		spectacleDays = new ArrayList<>();
 		List<Spectacleday> days = bd.getSpectacleDays();
@@ -95,7 +107,7 @@ public class ScheduleData implements Serializable {
 	private void loadSelectedSpectacleDayData() {
 		LOG.log(Level.INFO, "loading spectacleday data");
 
-		UFOBusinessDelegate bd = ServiceLocator.getInstance().getUFOBusinessDelegate();
+		UFOBusinessDelegate bd = serviceLocator.getUFOBusinessDelegate();
 		spectacleDayTimeSlots = new ArrayList<>();
 		spectacleDayTimeSlots = bd.getSpectacleDayTimeSlotsForSpectacleDay(spectacleDays.get(selectedSpectacleDayIndex).getSpectacleDay());
 		List<Performance> allPerformances = bd.getPerformancesForSpectacleDay(selectedSpectacleDay.getSpectacleDay());

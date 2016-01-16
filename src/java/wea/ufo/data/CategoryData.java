@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 import wea.ufo.util.ServiceLocator;
@@ -22,6 +23,18 @@ public class CategoryData implements Serializable {
 	private List<Category> categories;
 	private Category selectedCategory;
 	
+	@Inject
+	transient private ServiceLocator serviceLocator;
+
+	/**
+	 * Set the value of serviceLocator
+	 *
+	 * @param serviceLocator new value of serviceLocator
+	 */
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
+	
 	public CategoryData() {
 		LOG.log(Level.INFO, "created categoryData");
 	}
@@ -29,7 +42,7 @@ public class CategoryData implements Serializable {
 	@PostConstruct
 	public void init() {
 		LOG.log(Level.INFO, "loading categories");
-		categories = ServiceLocator.getInstance().getUFOBusinessDelegate().getCategories();
+		categories = serviceLocator.getUFOBusinessDelegate().getCategories();
 		if (!categories.isEmpty()) {
 			setSelectedCategory(categories.get(0));
 		}

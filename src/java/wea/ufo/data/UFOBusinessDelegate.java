@@ -1,13 +1,13 @@
 package wea.ufo.data;
 
+import java.io.Serializable;
 import java.util.List;
-import wea.ufo.model.ScheduleSpectacleDay;
 import wea.ufo.ws.*;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
-public interface UFOBusinessDelegate {
+public interface UFOBusinessDelegate extends Serializable {
 
 	public List<Area> getAreas();
 

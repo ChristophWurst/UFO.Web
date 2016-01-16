@@ -1,20 +1,19 @@
 package wea.ufo.data;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import wea.ufo.ws.*;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
-public class DummyBusinessDelegate implements UFOBusinessDelegate {
+public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable {
 
 	private final Random rand = new Random();
 	private final List<Area> areas;

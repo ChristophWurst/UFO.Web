@@ -1,8 +1,7 @@
 package wea.ufo.data;
 
+import java.io.Serializable;
 import java.util.List;
-import javax.inject.Inject;
-import wea.ufo.model.ScheduleSpectacleDay;
 import wea.ufo.ws.*;
 import wea.ufo.ws.UFO;
 import wea.ufo.ws.UFOSoap;
@@ -10,9 +9,9 @@ import wea.ufo.ws.UFOSoap;
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at
  */
-public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
+public class WebServiceBusinessDelegate implements UFOBusinessDelegate, Serializable {
 
-	private UFOSoap ws;
+	private final UFOSoap ws;
 
 	public WebServiceBusinessDelegate() {
 		UFO ufo = new UFO();
