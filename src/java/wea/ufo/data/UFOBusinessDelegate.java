@@ -1,6 +1,7 @@
 package wea.ufo.data;
 
 import java.util.List;
+import wea.ufo.model.ScheduleSpectacleDay;
 import wea.ufo.ws.*;
 
 /**
@@ -19,6 +20,10 @@ public interface UFOBusinessDelegate {
 	public List<TimeSlot> getTimeSlots();
 
 	public List<Spectacleday> getSpectacleDays();
+
+	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd);
+
+	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForSpectacleDay(Spectacleday day);
 
 	public boolean Login(String email, String password);
 

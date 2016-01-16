@@ -2,6 +2,7 @@ package wea.ufo.data;
 
 import java.util.List;
 import javax.inject.Inject;
+import wea.ufo.model.ScheduleSpectacleDay;
 import wea.ufo.ws.*;
 import wea.ufo.ws.UFO;
 import wea.ufo.ws.UFOSoap;
@@ -46,6 +47,16 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
 	@Override
 	public List<Spectacleday> getSpectacleDays() {
 		return ws.getSpectacleDays().getSpectacleday();
+	}
+	
+	@Override
+	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd) {
+		return ws.getPerformanesForSpetacleDay(sd).getPerformance();
+	}
+
+	@Override
+	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForSpectacleDay(Spectacleday day) {
+		return ws.getSpectacleDayTimeSlotsForSpectacleDay(day).getSpectacledayTimeSlot();
 	}
 
 	@Override

@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.xml.datatype.XMLGregorianCalendar;
 import wea.ufo.ws.*;
 
 /**
@@ -15,12 +16,14 @@ import wea.ufo.ws.*;
  */
 public class DummyBusinessDelegate implements UFOBusinessDelegate {
 
+	private final Random rand = new Random();
 	private final List<Area> areas;
 	private final List<Venue> venues;
 	private final List<Category> categories;
 	private final List<Artist> artists;
-	private List<TimeSlot> timeSlots;
-	private List<Spectacleday> spectacleDays;
+	private final List<TimeSlot> timeSlots;
+	private final List<Spectacleday> spectacleDays;
+	private final List<SpectacledayTimeSlot> spectacleDayTimeSlots;
 
 	public DummyBusinessDelegate() {
 		areas = new ArrayList<>();
@@ -39,7 +42,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 			for (int i = 0; i < 8; i++) {
 				Venue v = new Venue();
 				v.setAreaId(a.getId());
-				v.setId(i);
+				v.setId(a.getId() * 100 + i);
 				v.setDescription("Venue " + i);
 				v.setShortDescription("V" + i);
 				v.setLatitude(48.2950437);
@@ -59,7 +62,6 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 		}
 
 		artists = new ArrayList<>();
-		Random rand = new Random();
 		categories.stream().forEach((c) -> {
 			for (int j = 0; j < 11; j++) {
 				Artist a = new Artist();
@@ -74,6 +76,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 		timeSlots = new ArrayList<>();
 		for (int tst = 15; tst <= 23; tst++) {
 			TimeSlot ts = new TimeSlot();
+			ts.setId(tst);
 			ts.setStart(tst);
 			ts.setEnd(tst + 1);
 			timeSlots.add(ts);
@@ -85,8 +88,22 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 			ZonedDateTime zdt = ZonedDateTime.now();
 			GregorianCalendar gc = GregorianCalendar.from(zdt);
 			sd.setDay(new XMLGregorianCalendarImpl(gc));
+			sd.setId(z);
 			spectacleDays.add(sd);
 		}
+
+		spectacleDayTimeSlots = new ArrayList<>();
+		spectacleDays.forEach((Spectacleday sd) -> {
+			//Logger.getAnonymousLogger().log(Level.INFO, "{0} timeslots", timeSlots.size());
+			timeSlots.forEach((TimeSlot ts) -> {
+				SpectacledayTimeSlot sts = new SpectacledayTimeSlot();
+				sts.setId(spectacleDayTimeSlots.size());
+				sts.setTimeSlotId(ts.getId());
+				sts.setSpectacledayId(sd.getId());
+				sts.setTimeSlot(ts);
+				spectacleDayTimeSlots.add(sts);
+			});
+		});
 	}
 
 	@Override
@@ -119,13 +136,46 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 		return spectacleDays;
 	}
 
+	private Artist getRandomArtist() {
+		int maxId = artists.size();
+		int range = (int) (maxId * 1.4);
+		int idx = rand.nextInt(range);
+		if (idx > (maxId - 1)) {
+			return null;
+		}
+		return artists.get(idx);
+	}
+
+	@Override
+	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd) {
+		List<Performance> performances = new ArrayList();
+		venues.forEach((Venue v) -> {
+			List<SpectacledayTimeSlot> timeslots = getSpectacleDayTimeSlotsForSpectacleDay(sd);
+			timeslots.stream().forEach((SpectacledayTimeSlot ts) -> {
+				Artist a = getRandomArtist();
+				if (a != null) {
+					Performance p = new Performance();
+					p.setSpectacledayTimeSlot(ts.getId());
+					p.setVenueId(v.getId());
+					p.setArtistId(a.getId());
+					performances.add(p);
+				}
+			});
+		});
+		return performances;
+	}
+
+	@Override
+	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForSpectacleDay(Spectacleday day) {
+		return spectacleDayTimeSlots.stream().filter((sts) -> {
+			return sts.getSpectacledayId() == day.getId();
+		}).collect(Collectors.toList());
+	}
+
 	@Override
 	public boolean Login(String email, String password) {
-		if (email.equals("user@example.com") && password.equals("12345")) {
-			// Login successful
-			return true;
-		}
-		return false;
+		// Login successful
+		return email.equals("user@example.com") && password.equals("12345");
 	}
 
 }

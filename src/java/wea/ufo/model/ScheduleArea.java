@@ -1,12 +1,13 @@
 package wea.ufo.model;
 
+import java.io.Serializable;
 import java.util.List;
 import wea.ufo.ws.Area;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
-public class ScheduleArea {
+public class ScheduleArea implements Serializable {
 
 	private final Area area;
 	private List<ScheduleVenue> venues;
