@@ -94,6 +94,11 @@ public class ArtistData implements Serializable {
 	 * @return the value of artists
 	 */
 	public List<Artist> getArtists() {
+		loadArtists();
+		return artists;
+	}
+
+	private void loadArtists() {
 		Category cat = categoryData.getSelectedCategory();
 		if (cat != selectedCategory) {
 			selectedCategory = cat;
@@ -101,7 +106,6 @@ public class ArtistData implements Serializable {
 			artists = serviceLocator.getUFOBusinessDelegate().getArtistsForCategory(cat);
 			loadArtistFromParameterOrDefault();
 		}
-		return artists;
 	}
 
 	/**
@@ -137,6 +141,8 @@ public class ArtistData implements Serializable {
 	 * @return the value of selectedArtist
 	 */
 	public Artist getSelectedArtist() {
+		LOG.log(Level.INFO, "artist <{0}> selected", selectedArtist == null ? "non" : selectedArtist.getId());
+		loadArtists();
 		return selectedArtist;
 	}
 
