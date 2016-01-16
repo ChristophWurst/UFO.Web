@@ -28,7 +28,10 @@
 								<div class="row">
 									<div class="col-md-2">#{venue.name}</div>
 									<c:forEach var="performance" items="#{venue.performances}">
-										<div class="col-md-1 small text-center">#{performance.label}</div>
+										<div class="col-md-1 small text-center">
+											<h:link outcome="#{performance.linkToArtist}" value="#{performance.label}" rendered="#{performance.linkToArtist != null}" />
+											<h:outputText value="-" rendered="#{performance.linkToArtist == null}" />
+										</div>
 									</c:forEach>
 								</div>
 							</c:forEach>

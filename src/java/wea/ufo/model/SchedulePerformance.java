@@ -20,5 +20,15 @@ public class SchedulePerformance implements Serializable {
 		}
 		return "P " + artist.getName();
 	}
-
+	
+	public String getLinkToArtist() {
+		if (artist == null) {
+			return null;
+		}
+		return "artists?categoryId="
+			+ artist.getCategoryId()
+			+ "&artistId="
+			+ artist.getId();
+	}
+	
 }
