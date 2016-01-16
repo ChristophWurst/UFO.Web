@@ -20,7 +20,7 @@
 					</div>
 					<div class="col-md-3 col-master">
 						<p:dataTable id="venueTable" var="venue" value="#{venueData.venues}"
-							     selectionMode="single" rowKey="#{venue.id}">
+							     selectionMode="single" rowKey="#{venue.id}" selection="#{venueData.selectedVenue}">
 							<p:ajax event="rowSelect" listener="#{venueData.onVenueSelected}" update="@form"/>
 							<p:column>
 								<h:outputText id="name" value="#{venue.description}"/>

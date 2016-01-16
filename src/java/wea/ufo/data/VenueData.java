@@ -72,6 +72,7 @@ public class VenueData implements Serializable {
 	 * @return the value of selectedVenue
 	 */
 	public Venue getSelectedVenue() {
+		loadVenues();
 		return selectedVenue;
 	}
 
@@ -102,10 +103,14 @@ public class VenueData implements Serializable {
 		LOG.log(Level.INFO, "Venue selected: {0}", getSelectedVenue().getShortDescription());
 	}
 
-	private void loadVenues(Area a) {
+	private void loadVenues() {
 		LOG.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
-		venues = serviceLocator.getUFOBusinessDelegate().getVenuesForArea(a);
-		selectVenueFromParameter();
+		Area a = areaData.getSelectedArea();
+		if (a != selectedArea) {
+			selectedArea = a;
+			venues = serviceLocator.getUFOBusinessDelegate().getVenuesForArea(a);
+			selectVenueFromParameter();
+		}
 	}
 
 	private void selectVenueFromParameter() {
@@ -114,7 +119,7 @@ public class VenueData implements Serializable {
 			setSelectedVenue(null);
 		}
 
-		String parameter = httpServletRequest.getParameter("areaId");
+		String parameter = httpServletRequest.getParameter("venueId");
 		if (parameter != null) {
 			final int parameterId = Integer.parseInt(parameter);
 
@@ -136,11 +141,7 @@ public class VenueData implements Serializable {
 	}
 
 	public List<Venue> getVenues() {
-		Area a = areaData.getSelectedArea();
-		if (a != selectedArea) {
-			selectedArea = a;
-			loadVenues(a);
-		}
+		loadVenues();
 		return venues;
 	}
 
