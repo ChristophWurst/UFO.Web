@@ -64,7 +64,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 		categories.stream().forEach((c) -> {
 			for (int j = 0; j < 11; j++) {
 				Artist a = new Artist();
-				a.setId(j * j);
+				a.setId(c.getId() * 100 + j);
 				a.setCategoryId(c.getId());
 				a.setName("Artist " + rand.nextDouble());
 				a.setImage("images/" + (j + 1) + ".jpg");

@@ -2,12 +2,14 @@ package wea.ufo.data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.event.SelectEvent;
 import wea.ufo.util.ServiceLocator;
 import wea.ufo.ws.Artist;
@@ -28,6 +30,8 @@ public class ArtistData implements Serializable {
 	private CategoryData categoryData;
 	@Inject
 	transient private ServiceLocator serviceLocator;
+	@Inject
+	private HttpServletRequest httpServletRequest;
 
 	/**
 	 * Set the value of serviceLocator
@@ -36,6 +40,15 @@ public class ArtistData implements Serializable {
 	 */
 	public void setServiceLocator(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;
+	}
+
+	/**
+	 * Set the value of httpServletRequest
+	 *
+	 * @param request
+	 */
+	public void setHttpServletRequest(HttpServletRequest request) {
+		httpServletRequest = request;
 	}
 
 	public ArtistData() {
@@ -47,6 +60,34 @@ public class ArtistData implements Serializable {
 		LOG.log(Level.INFO, "initializing artistData");
 	}
 
+	private void loadArtistFromParameterOrDefault() {
+		if (artists.isEmpty()) {
+			// nothing to select
+			setSelectedArtist(null);
+			return;
+		}
+
+		String parameter = httpServletRequest.getParameter("artistId");
+		if (parameter != null) {
+			final int parameterId = Integer.parseInt(parameter);
+			
+			// try to locate get-parameter artist
+			try {
+				Artist fromParameter = artists.stream().filter((Artist a) -> {
+					return a.getId() == parameterId;
+				}).findFirst().get();
+				setSelectedArtist(fromParameter);
+				LOG.log(Level.INFO, "selected artist {0} based on get-parameter", fromParameter.getId());
+			} catch (NoSuchElementException e) {
+				// use default - nothing to do
+				setSelectedArtist(null);
+				LOG.log(Level.WARNING, "could not select category {0} based on get-parameter", parameterId);
+			}
+		} else {
+			setSelectedArtist(artists.get(0));
+		}
+	}
+
 	/**
 	 * Get the value of artists
 	 *
@@ -56,11 +97,9 @@ public class ArtistData implements Serializable {
 		Category cat = categoryData.getSelectedCategory();
 		if (cat != selectedCategory) {
 			selectedCategory = cat;
-			LOG.log(Level.INFO, "loading artists for category <{0}> ", cat.getDescription());
+			LOG.log(Level.INFO, "loading artists for category <{0}> ", cat.getId());
 			artists = serviceLocator.getUFOBusinessDelegate().getArtistsForCategory(cat);
-			if (!artists.isEmpty()) {
-				setSelectedArtist(artists.get(0));
-			}
+			loadArtistFromParameterOrDefault();
 		}
 		return artists;
 	}
