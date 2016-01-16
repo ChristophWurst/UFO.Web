@@ -15,6 +15,8 @@ public interface UFOBusinessDelegate {
 
 	public List<Category> getCategories();
 
+	public List<Artist> getArtists();
+
 	public List<Artist> getArtistsForCategory(Category cat);
 
 	public List<TimeSlot> getTimeSlots();

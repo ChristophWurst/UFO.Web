@@ -122,6 +122,11 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate {
 	}
 
 	@Override
+	public List<Artist> getArtists() {
+		return artists;
+	}
+
+	@Override
 	public List<Artist> getArtistsForCategory(Category cat) {
 		return artists.stream().filter(a -> a.getCategoryId() == cat.getId()).collect(Collectors.toList());
 	}

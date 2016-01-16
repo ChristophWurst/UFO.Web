@@ -18,6 +18,13 @@ body {
 	background-color: lightgray;
 }
 
+/* schedule conten */
+#schedule .row:not(.header) div:not(:first-child) {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 #login-container {
 	position: absolute;
 	top: 70px;

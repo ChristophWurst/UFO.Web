@@ -1,24 +1,24 @@
 package wea.ufo.model;
 
 import java.io.Serializable;
-import wea.ufo.ws.Performance;
+import wea.ufo.ws.Artist;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  */
 public class SchedulePerformance implements Serializable {
 
-	private final Performance performance;
+	private final Artist artist;
 
-	public SchedulePerformance(Performance p) {
-		performance = p;
+	public SchedulePerformance(Artist a) {
+		artist = a;
 	}
 
 	public String getLabel() {
-		if (performance == null) {
+		if (artist == null) {
 			return "-";
 		}
-		return "P " + performance.getArtistId();
+		return "P " + artist.getName();
 	}
 
 }

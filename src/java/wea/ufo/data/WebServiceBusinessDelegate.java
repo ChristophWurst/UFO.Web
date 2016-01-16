@@ -35,6 +35,11 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
 	}
 
 	@Override
+	public List<Artist> getArtists() {
+		return ws.getArtists().getArtist();
+	}
+
+	@Override
 	public List<Artist> getArtistsForCategory(Category cat) {
 		return ws.getArtistsForCategory(cat).getArtist();
 	}
@@ -48,7 +53,7 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate {
 	public List<Spectacleday> getSpectacleDays() {
 		return ws.getSpectacleDays().getSpectacleday();
 	}
-	
+
 	@Override
 	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd) {
 		return ws.getPerformanesForSpetacleDay(sd).getPerformance();
