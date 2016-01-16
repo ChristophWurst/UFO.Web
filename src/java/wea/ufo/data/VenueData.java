@@ -3,11 +3,13 @@ package wea.ufo.data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -32,6 +34,9 @@ public class VenueData implements Serializable {
 	@Inject
 	transient private ServiceLocator serviceLocator;
 
+	@Inject
+	private HttpServletRequest httpServletRequest;
+
 	/**
 	 * Set the value of serviceLocator
 	 *
@@ -39,6 +44,15 @@ public class VenueData implements Serializable {
 	 */
 	public void setServiceLocator(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;
+	}
+
+	/**
+	 * Set the value of httpServletRequest
+	 *
+	 * @param request
+	 */
+	public void setHttpServletRequest(HttpServletRequest request) {
+		httpServletRequest = request;
 	}
 
 	@Inject
@@ -91,7 +105,32 @@ public class VenueData implements Serializable {
 	private void loadVenues(Area a) {
 		LOG.log(Level.INFO, "Loading venues for area {0}", areaData.getSelectedArea().getName());
 		venues = serviceLocator.getUFOBusinessDelegate().getVenuesForArea(a);
-		if (!venues.isEmpty()) {
+		selectVenueFromParameter();
+	}
+
+	private void selectVenueFromParameter() {
+		if (venues.isEmpty()) {
+			// nothing to select
+			setSelectedVenue(null);
+		}
+
+		String parameter = httpServletRequest.getParameter("areaId");
+		if (parameter != null) {
+			final int parameterId = Integer.parseInt(parameter);
+
+			// try to locate get-parameter area
+			try {
+				Venue fromParameter = venues.stream().filter((Venue v) -> {
+					return v.getId() == parameterId;
+				}).findFirst().get();
+				setSelectedVenue(fromParameter);
+				LOG.log(Level.INFO, "selected venue {0} based on get-parameter", fromParameter.getId());
+			} catch (NoSuchElementException e) {
+				// use default - nothing to do
+				setSelectedVenue(null);
+				LOG.log(Level.WARNING, "could not select venue {0} based on get-parameter", parameterId);
+			}
+		} else {
 			setSelectedVenue(venues.get(0));
 		}
 	}
