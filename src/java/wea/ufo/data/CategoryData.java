@@ -10,7 +10,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import org.primefaces.component.log.Log;
 import org.primefaces.event.SelectEvent;
 import wea.ufo.util.ServiceLocator;
 import wea.ufo.ws.Category;

@@ -11,6 +11,27 @@
 				<div class="col-md-9">
 					<h1>Artists</h1>
 				</div>
+				<div class="col-md-3">
+					<h:panelGroup class="input-group" id="search-container" layout="block">
+						<p:autoComplete id="search" 
+								completeMethod="#{artistSearch.searchArtists}"
+								var="searchArtist"
+								value="#{artistSearch.selectedArtist}"
+								itemLabel="#{searchArtist.name}" 
+								itemValue="#{searchArtist}"
+								converter="entityConverter"
+								forceSelection="true">
+							<p:ajax event="itemSelect" listener="#{artistSearch.onArtistSelected}" update=":search-container" />
+						</p:autoComplete>
+						<span>
+							<h:panelGroup rendered="#{artistSearch.selectedArtist != null}">
+								<h:link outcome="#{artistSearch.selectedArtistLink}" 
+									value="GO"
+									class="btn btn-default" />
+							</h:panelGroup>
+						</span>
+					</h:panelGroup><!-- /input-group -->
+				</div>
 			</div>
 			<h:form>
 				<div class="container row">
