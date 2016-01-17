@@ -26,6 +26,11 @@
 	<welcome-file-list>
 		<welcome-file>faces/index.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>wea.ufo.filter.LoginFilter</filter-class>
+	</filter>
     
 	<context-param>
 		<param-name>BUSINESS_DELEGATE</param-name>

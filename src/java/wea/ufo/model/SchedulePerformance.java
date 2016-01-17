@@ -2,6 +2,7 @@ package wea.ufo.model;
 
 import java.io.Serializable;
 import wea.ufo.ws.Artist;
+import wea.ufo.ws.Performance;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -9,9 +10,11 @@ import wea.ufo.ws.Artist;
 public class SchedulePerformance implements Serializable {
 
 	private final Artist artist;
+	private final Performance performance;
 
-	public SchedulePerformance(Artist a) {
+	public SchedulePerformance(Artist a, Performance p) {
 		artist = a;
+		performance = p;
 	}
 
 	public String getLabel() {
@@ -20,7 +23,7 @@ public class SchedulePerformance implements Serializable {
 		}
 		return "P " + artist.getName();
 	}
-	
+
 	public String getLinkToArtist() {
 		if (artist == null) {
 			return null;
@@ -30,5 +33,13 @@ public class SchedulePerformance implements Serializable {
 			+ "&artistId="
 			+ artist.getId();
 	}
-	
+
+	public String getLinkToPerformance() {
+		if (performance == null) {
+			return null;
+		}
+		return "performances"
+			+ "?performanceId=" + performance.getId();
+	}
+
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -135,7 +134,7 @@ public class ScheduleData implements Serializable {
 						// Nothing to do
 					}
 
-					performances.add(new SchedulePerformance(art));
+					performances.add(new SchedulePerformance(art, per));
 				});
 				v.setPerformances(performances);
 			});
