@@ -25,6 +25,11 @@ public class ScheduleArea implements Serializable {
 		return area.getName();
 	}
 
+	public String getLink() {
+		return "venues"
+			+ "?areaId=" + area.getId();
+	}
+
 	/**
 	 * Get the value of venues
 	 *
@@ -42,6 +47,5 @@ public class ScheduleArea implements Serializable {
 	public void setVenues(List<ScheduleVenue> venues) {
 		this.venues = venues;
 	}
-
 
 }

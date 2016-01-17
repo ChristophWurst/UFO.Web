@@ -19,14 +19,18 @@
 					<div id="schedule">
 						<c:forEach var="area" items="#{scheduleData.areas}">
 							<div class="row header">
-								<div class="col-md-2">#{area.name}</div>
+								<div class="col-md-2">
+									<h:link outcome="#{area.link}" value="#{area.name}" />
+								</div>
 								<c:forEach var="timeSlot" items="#{scheduleData.timeSlots}">
 									<div class="col-md-1 text-center">#{timeSlot.label}</div>
 								</c:forEach>
 							</div>
 							<c:forEach var="venue" items="#{area.venues}">
 								<div class="row">
-									<div class="col-md-2">#{venue.name}</div>
+									<div class="col-md-2">
+										<h:link outcome="#{venue.link}" value="#{venue.name}" />
+									</div>
 									<c:forEach var="performance" items="#{venue.performances}">
 										<div class="col-md-1 small text-center">
 											<h:link outcome="#{performance.linkToArtist}" value="#{performance.label}" rendered="#{performance.linkToArtist != null}" />

@@ -26,6 +26,12 @@ public class ScheduleVenue implements Serializable {
 		return venue.getDescription();
 	}
 
+	public String getLink() {
+		return "venues"
+			+ "?areaId=" + venue.getAreaId()
+			+ "&venueId=" + venue.getId();
+	}
+
 	/**
 	 * Get the value of performances
 	 *
