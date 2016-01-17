@@ -34,7 +34,7 @@
     
 	<context-param>
 		<param-name>BUSINESS_DELEGATE</param-name>
-		<param-value>wea.ufo.data.DummyBusinessDelegate</param-value>
+		<param-value>wea.ufo.data.WebServiceBusinessDelegate</param-value>
 	</context-param>
     
 	<listener>

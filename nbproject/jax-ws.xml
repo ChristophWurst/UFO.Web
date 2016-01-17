@@ -3,9 +3,9 @@
   <services>
   </services>
   <clients>
-    <client name="UFO.asmx">
-      <wsdl-url>file:/home/christoph/workspace/UFO.Web/web/WEB-INF/wsdl/localhost_49353/UFO.asmx.wsdl</wsdl-url>
-      <local-wsdl-file>UFO.asmx.wsdl</local-wsdl-file>
+    <client name="UFO">
+      <wsdl-url>http://localhost:49353/UFO.asmx?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_49353/UFO.asmx.wsdl</local-wsdl-file>
       <package-name forceReplace="true">wea.ufo.ws</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <use-dispatch>true</use-dispatch>
@@ -24,7 +24,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>file:/home/christoph/workspace/UFO.Web/web/WEB-INF/wsdl/localhost_49353/UFO.asmx.wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:49353/UFO.asmx?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

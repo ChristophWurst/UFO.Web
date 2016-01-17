@@ -26,21 +26,21 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-UFO.asmx" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/UFO.asmx"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UFO.asmx" destdir="${build.generated.dir}/jax-wsCache/UFO.asmx" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UFO.asmx/wsdl/UFO.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="file:/home/christoph/workspace/UFO.Web/web/WEB-INF/wsdl/localhost_49353/UFO.asmx.wsdl" xnocompile="true" xendorsed="true" package="wea.ufo.ws">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/UFO.asmx/wsdl/UFO.asmx.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/UFO.asmx"/>
+    <target name="wsimport-client-UFO" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/UFO"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UFO" destdir="${build.generated.dir}/jax-wsCache/UFO" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UFO/wsdl/localhost_49353/UFO.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:49353/UFO.asmx?wsdl" xnocompile="true" xendorsed="true" package="wea.ufo.ws">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/UFO/wsdl/localhost_49353/UFO.asmx.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/UFO"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/UFO.asmx">
+            <fileset dir="${build.generated.dir}/jax-wsCache/UFO">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-UFO.asmx" depends="-init-project">
+    <target name="wsimport-client-clean-UFO" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/wea/ufo/ws"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/UFO.asmx"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/UFO"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-UFO.asmx"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-UFO"/>
 </project>
