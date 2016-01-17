@@ -68,6 +68,7 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 				a.setCategoryId(c.getId());
 				a.setName("Artist " + rand.nextDouble());
 				a.setImage("images/" + (j + 1) + ".jpg");
+				a.setVideo("dQw4w9WgXcQ");
 				artists.add(a);
 			}
 		});

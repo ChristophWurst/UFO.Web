@@ -31,6 +31,16 @@
 						<h2><h:outputText value="#{artistData.selectedArtist.name}" /></h2>
 						<p:graphicImage value="http://www.winzerhof-wurst.at/ufo/#{artistData.selectedArtist.image}"
 								rendered="#{artistData.selectedArtist.image != null}"/>
+						<h3>Video</h3>
+						<h:panelGroup layout="block" 
+							      class="embed-responsive embed-responsive-16by9"
+							      rendered="#{artistData.selectedArtist.video != null}">
+							<iframe width="560"
+								height="315"
+								src="https://www.youtube.com/embed/#{artistData.selectedArtist.video}"
+								frameborder="0"
+								allowfullscreen="true" />
+						</h:panelGroup>
 					</div>
 				</div>
 			</h:form>
