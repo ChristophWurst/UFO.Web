@@ -21,7 +21,7 @@ public class SchedulePerformance implements Serializable {
 		if (artist == null) {
 			return "-";
 		}
-		return "P " + artist.getName();
+		return artist.getName();
 	}
 
 	public String getLinkToArtist() {
