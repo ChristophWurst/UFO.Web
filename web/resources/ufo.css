@@ -18,11 +18,16 @@ body {
 	background-color: lightgray;
 }
 
-/* schedule conten */
+/* schedule content */
 #schedule .row:not(.header) div:not(:first-child) {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+/* schedule columns */
+#schedule .row div:not(:first-child) {
+	width: 11.9%;
 }
 
 #login-container {
