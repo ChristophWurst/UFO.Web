@@ -8,49 +8,49 @@
 	<ui:composition template="/WEB-INF/templates/base.xhtml">
 		<ui:define name="title">Artists</ui:define>
 		<ui:define name="content">
-			<p:tabView id="scheduleTab"
-				   value="#{scheduleData.spectacleDays}"
-				   cache="true"
-				   var="spectacleDay"
-				   dynamic="true"
-				   activeIndex="#{scheduleData.selectedSpectacleDayIndex}">
-				<p:ajax event="tabChange" listener="#{scheduleData.onSpectacleDaySelected}" update=":scheduleTab" />
-				<p:tab title="#{spectacleDay.label}">
-					<div id="schedule">
-						<c:forEach var="area" items="#{scheduleData.areas}">
-							<div class="row header">
-								<div class="col-md-2">
-									<h:link outcome="#{area.link}" value="#{area.name}" />
-								</div>
-								<c:forEach var="timeSlot" items="#{scheduleData.timeSlots}">
-									<div class="col-md-1 text-center">#{timeSlot.label}</div>
-								</c:forEach>
-							</div>
-							<c:forEach var="venue" items="#{area.venues}">
-								<div class="row">
+			<h:form id="schedule-form">
+				<p:tabView id="scheduleTab"
+					   value="#{scheduleData.spectacleDays}"
+					   var="spectacleDay"
+					   activeIndex="#{scheduleData.selectedSpectacleDayIndex}">
+					<p:ajax event="tabChange" listener="#{scheduleData.onSpectacleDaySelected}" update=":schedule-form" />
+					<p:tab title="#{spectacleDay.label}">
+						<div id="schedule">
+							<c:forEach var="area" items="#{scheduleData.areas}">
+								<div class="row header">
 									<div class="col-md-2">
-										<h:link outcome="#{venue.link}" value="#{venue.name}" />
+										<h:link outcome="#{area.link}" value="#{area.name}" />
 									</div>
-									<c:forEach var="performance" items="#{venue.performances}">
-										<h:panelGroup class="col-md-1 small text-center"
-											      rendered="#{userData.loggedIn == false}"
-											      layout="block">
-											<h:link outcome="#{performance.linkToArtist}" value="#{performance.label}" rendered="#{performance.linkToArtist != null}" />
-											<h:outputText value="-" rendered="#{performance.linkToArtist == null}" />
-										</h:panelGroup>
-										<h:panelGroup class="col-md-1 small text-center"
-											      rendered="#{userData.loggedIn == true}"
-											      layout="block">
-											<h:link outcome="#{performance.linkToPerformance}" value="#{performance.label}" rendered="#{performance.linkToPerformance != null}" />
-											<h:outputText value="-" rendered="#{performance.linkToPerformance == null}" />
-										</h:panelGroup>
+									<c:forEach var="timeSlot" items="#{scheduleData.timeSlots}">
+										<div class="col-md-1 text-center">#{timeSlot.label}</div>
 									</c:forEach>
 								</div>
+								<c:forEach var="venue" items="#{area.venues}">
+									<div class="row">
+										<div class="col-md-2">
+											<h:link outcome="#{venue.link}" value="#{venue.name}" />
+										</div>
+										<c:forEach var="performance" items="#{venue.performances}">
+											<h:panelGroup class="col-md-1 small text-center"
+												      rendered="#{userData.loggedIn == false}"
+												      layout="block">
+												<h:link outcome="#{performance.linkToArtist}" value="#{performance.label}" rendered="#{performance.linkToArtist != null}" />
+												<h:outputText value="-" rendered="#{performance.linkToArtist == null}" />
+											</h:panelGroup>
+											<h:panelGroup class="col-md-1 small text-center"
+												      rendered="#{userData.loggedIn == true}"
+												      layout="block">
+												<h:link outcome="#{performance.linkToPerformance}" value="#{performance.label}" rendered="#{performance.linkToPerformance != null}" />
+												<h:outputText value="-" rendered="#{performance.linkToPerformance == null}" />
+											</h:panelGroup>
+										</c:forEach>
+									</div>
+								</c:forEach>
 							</c:forEach>
-						</c:forEach>
-					</div>
-				</p:tab>
-			</p:tabView>
+						</div>
+					</p:tab>
+				</p:tabView>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </html>

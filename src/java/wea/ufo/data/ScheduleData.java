@@ -99,7 +99,7 @@ public class ScheduleData implements Serializable {
 		ts.stream().forEach((t) -> {
 			timeSlots.add(new ScheduleTimeSlot(t));
 		});
-		
+
 		artists = bd.getArtists();
 	}
 
@@ -110,6 +110,7 @@ public class ScheduleData implements Serializable {
 		spectacleDayTimeSlots = new ArrayList<>();
 		spectacleDayTimeSlots = bd.getSpectacleDayTimeSlotsForSpectacleDay(spectacleDays.get(selectedSpectacleDayIndex).getSpectacleDay());
 		List<Performance> allPerformances = bd.getPerformancesForSpectacleDay(selectedSpectacleDay.getSpectacleDay());
+		LOG.log(Level.INFO, "spectacleday {0} has {1} performances", new Object[]{selectedSpectacleDay.getLabel(), allPerformances.size()});
 
 		areas.forEach((ScheduleArea sa) -> {
 			sa.getVenues().forEach((ScheduleVenue v) -> {
@@ -125,7 +126,7 @@ public class ScheduleData implements Serializable {
 							return p.getVenueId() == v.getVenue().getId()
 								&& p.getSpectacledayTimeSlot() == sdts.getId();
 						}).findFirst().get();
-						
+
 						int artistId = per.getArtistId();
 						art = artists.stream().filter((Artist a) -> {
 							return artistId == a.getId();
@@ -191,7 +192,10 @@ public class ScheduleData implements Serializable {
 
 	public void onSpectacleDaySelected(TabChangeEvent e) {
 		ScheduleSpectacleDay ssd = (ScheduleSpectacleDay) e.getData();
-		LOG.log(Level.INFO, "ssd {0} selected", ssd.getLabel());
+		LOG.log(Level.INFO, "spectacleday tab {0} selected", ssd.getLabel());
+		selectedSpectacleDay = ssd;
+		selectedSpectacleDayIndex = spectacleDays.indexOf(ssd);
+		loadSelectedSpectacleDayData();
 	}
 
 }
