@@ -33,12 +33,14 @@
 										<c:forEach var="performance" items="#{venue.performances}">
 											<h:panelGroup class="col-md-1 small text-center"
 												      rendered="#{userData.loggedIn == false}"
+												      style="background-color: #{performance.color}"
 												      layout="block">
 												<h:link outcome="#{performance.linkToArtist}" value="#{performance.label}" rendered="#{performance.linkToArtist != null}" />
 												<h:outputText value="-" rendered="#{performance.linkToArtist == null}" />
 											</h:panelGroup>
 											<h:panelGroup class="col-md-1 small text-center"
 												      rendered="#{userData.loggedIn == true}"
+												      style="background-color: #{performance.color}"
 												      layout="block">
 												<h:link outcome="#{performance.linkToPerformance}" value="#{performance.label}" rendered="#{performance.linkToPerformance != null}" />
 												<h:outputText value="-" rendered="#{performance.linkToPerformance == null}" />

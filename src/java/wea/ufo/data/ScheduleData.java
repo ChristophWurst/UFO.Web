@@ -20,6 +20,7 @@ import wea.ufo.model.ScheduleVenue;
 import wea.ufo.util.ServiceLocator;
 import wea.ufo.ws.Area;
 import wea.ufo.ws.Artist;
+import wea.ufo.ws.Category;
 import wea.ufo.ws.Performance;
 import wea.ufo.ws.Spectacleday;
 import wea.ufo.ws.SpectacledayTimeSlot;
@@ -42,6 +43,8 @@ public class ScheduleData implements Serializable {
 	private List<ScheduleTimeSlot> timeSlots;
 	private List<SpectacledayTimeSlot> spectacleDayTimeSlots;
 	private List<Artist> artists;
+	private List<Category> categories;
+
 	@Inject
 	transient private ServiceLocator serviceLocator;
 
@@ -94,6 +97,8 @@ public class ScheduleData implements Serializable {
 			areas.add(sa);
 		});
 
+		categories = bd.getCategories();
+
 		timeSlots = new ArrayList<>();
 		List<TimeSlot> ts = bd.getTimeSlots();
 		ts.stream().forEach((t) -> {
@@ -120,6 +125,7 @@ public class ScheduleData implements Serializable {
 					// get performance fro this venue/timeslot combination
 					Performance per = null;
 					Artist art = null;
+					Category cat = null;
 
 					try {
 						per = allPerformances.stream().filter((Performance p) -> {
@@ -131,11 +137,16 @@ public class ScheduleData implements Serializable {
 						art = artists.stream().filter((Artist a) -> {
 							return artistId == a.getId();
 						}).findFirst().get();
+
+						int catId = art.getCategoryId();
+						cat = categories.stream().filter((Category c) -> {
+							return c.getId() == catId;
+						}).findFirst().get();
 					} catch (NoSuchElementException e) {
 						// Nothing to do
 					}
 
-					performances.add(new SchedulePerformance(art, per));
+					performances.add(new SchedulePerformance(art, per, cat));
 				});
 				v.setPerformances(performances);
 			});
