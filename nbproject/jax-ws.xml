@@ -38,6 +38,10 @@
           <wsimport-option-name>package</wsimport-option-name>
           <wsimport-option-value>wea.ufo.ws</wsimport-option-value>
         </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>binding</wsimport-option-name>
+          <wsimport-option-value>${basedir}/jaxb-bindings.xml</wsimport-option-value>
+        </wsimport-option>
       </wsimport-options>
     </client>
   </clients>

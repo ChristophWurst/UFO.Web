@@ -28,7 +28,7 @@
     </target>
     <target name="wsimport-client-UFO" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/UFO"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UFO" destdir="${build.generated.dir}/jax-wsCache/UFO" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UFO/wsdl/localhost_49353/UFO.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:49353/UFO.asmx?wsdl" xnocompile="true" xendorsed="true" package="wea.ufo.ws">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UFO" destdir="${build.generated.dir}/jax-wsCache/UFO" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UFO/wsdl/localhost_49353/UFO.asmx.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:49353/UFO.asmx?wsdl" xnocompile="true" xendorsed="true" package="wea.ufo.ws" binding="${basedir}/jaxb-bindings.xml">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/UFO/wsdl/localhost_49353/UFO.asmx.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/UFO"/>
         </wsimport>
