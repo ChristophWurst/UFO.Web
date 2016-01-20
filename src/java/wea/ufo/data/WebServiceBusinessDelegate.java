@@ -1,7 +1,9 @@
 package wea.ufo.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import wea.ufo.util.ServiceLocator;
 import wea.ufo.ws.*;
 import wea.ufo.ws.UFO;
 import wea.ufo.ws.UFOSoap;
@@ -21,6 +23,11 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate, Serializ
 	@Override
 	public List<Area> getAreas() {
 		return ws.getAreas().getArea();
+	}
+
+	@Override
+	public List<Venue> getVenues() {
+		return ws.getVenues().getVenue();
 	}
 
 	@Override
@@ -54,8 +61,34 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate, Serializ
 	}
 
 	@Override
+	public List<Venue> getVenuesForPerformances(List<Performance> performances) {
+		ArrayOfPerformance data = new ArrayOfPerformance();
+		data.getPerformance().addAll(performances);
+		return ws.getVenuesForPerformances(data).getVenue();
+	}
+
+	@Override
+	public Performance getPerformance(int id) {
+		return ws.getPerformance(id);
+	}
+
+	@Override
+	public void updatePerformance(Spectacleday day, Performance performance) {
+		ArrayOfPerformance data = new ArrayOfPerformance();
+		data.getPerformance().add(performance);
+		ws.updatePerformances(day, data);
+	}
+
+	@Override
 	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd) {
 		return ws.getPerformanesForSpetacleDay(sd).getPerformance();
+	}
+
+	@Override
+	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForPerformance(Performance performance) {
+		ArrayOfPerformance data = new ArrayOfPerformance();
+		data.getPerformance().add(performance);
+		return ws.getSpectacledayTimeSlotsForPerformances(data).getSpectacledayTimeSlot();
 	}
 
 	@Override

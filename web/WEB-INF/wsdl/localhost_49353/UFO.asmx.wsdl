@@ -385,6 +385,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetPerformance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPerformanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPerformanceResult" type="tns:Performance" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetPerformancesForArtist">
         <s:complexType>
           <s:sequence>
@@ -631,6 +645,12 @@
   <wsdl:message name="UpdateVenueSoapOut">
     <wsdl:part name="parameters" element="tns:UpdateVenueResponse" />
   </wsdl:message>
+  <wsdl:message name="GetPerformanceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPerformance" />
+  </wsdl:message>
+  <wsdl:message name="GetPerformanceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPerformanceResponse" />
+  </wsdl:message>
   <wsdl:message name="GetPerformancesForArtistSoapIn">
     <wsdl:part name="parameters" element="tns:GetPerformancesForArtist" />
   </wsdl:message>
@@ -767,6 +787,10 @@
     <wsdl:operation name="UpdateVenue">
       <wsdl:input message="tns:UpdateVenueSoapIn" />
       <wsdl:output message="tns:UpdateVenueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPerformance">
+      <wsdl:input message="tns:GetPerformanceSoapIn" />
+      <wsdl:output message="tns:GetPerformanceSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetPerformancesForArtist">
       <wsdl:input message="tns:GetPerformancesForArtistSoapIn" />
@@ -994,6 +1018,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateVenue">
       <soap:operation soapAction="http://ufo.fh-hagenberg.at/UpdateVenue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPerformance">
+      <soap:operation soapAction="http://ufo.fh-hagenberg.at/GetPerformance" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1267,6 +1300,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateVenue">
       <soap12:operation soapAction="http://ufo.fh-hagenberg.at/UpdateVenue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPerformance">
+      <soap12:operation soapAction="http://ufo.fh-hagenberg.at/GetPerformance" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

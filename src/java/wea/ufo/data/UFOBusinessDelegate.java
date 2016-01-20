@@ -11,6 +11,8 @@ public interface UFOBusinessDelegate extends Serializable {
 
 	public List<Area> getAreas();
 
+	public List<Venue> getVenues();
+
 	public List<Venue> getVenuesForArea(Area a);
 
 	public List<Category> getCategories();
@@ -23,7 +25,15 @@ public interface UFOBusinessDelegate extends Serializable {
 
 	public List<Spectacleday> getSpectacleDays();
 
+	public List<Venue> getVenuesForPerformances(List<Performance> performances);
+
+	public Performance getPerformance(int id);
+
+	public void updatePerformance(Spectacleday day, Performance performance);
+
 	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd);
+
+	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForPerformance(Performance performance);
 
 	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForSpectacleDay(Spectacleday day);
 

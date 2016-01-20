@@ -112,8 +112,22 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 	}
 
 	@Override
+	public List<Venue> getVenues() {
+		return venues;
+	}
+
+	@Override
 	public List<Venue> getVenuesForArea(Area a) {
 		return venues.stream().filter(v -> v.getAreaId() == a.getId()).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Venue> getVenuesForPerformances(List<Performance> performances) {
+		List<Venue> result = new ArrayList<>();
+		performances.stream().forEach((p) -> {
+			result.add(venues.stream().filter((Venue v) -> v.getId() == p.getVenueId()).findFirst().get());
+		});
+		return result;
 	}
 
 	@Override
@@ -152,6 +166,21 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 	}
 
 	@Override
+	public Performance getPerformance(int id) {
+		Performance p = new Performance();
+		p.setId(id);
+		p.setArtistId(artists.get(rand.nextInt(artists.size()) - 1).getId());
+		p.setSpectacledayTimeSlot(spectacleDayTimeSlots.get(rand.nextInt(spectacleDayTimeSlots.size())).getId());
+		p.setVenueId(venues.get(rand.nextInt(venues.size())).getId());
+		return p;
+	}
+
+	@Override
+	public void updatePerformance(Spectacleday day, Performance performance) {
+		// Nothing to save
+	}
+
+	@Override
 	public List<Performance> getPerformancesForSpectacleDay(Spectacleday sd) {
 		List<Performance> performances = new ArrayList();
 		venues.forEach((Venue v) -> {
@@ -168,6 +197,11 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 			});
 		});
 		return performances;
+	}
+
+	@Override
+	public List<SpectacledayTimeSlot> getSpectacleDayTimeSlotsForPerformance(Performance performance) {
+		return spectacleDayTimeSlots;
 	}
 
 	@Override
