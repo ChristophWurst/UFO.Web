@@ -9,6 +9,7 @@
 		<ui:define name="title">Artists</ui:define>
 		<ui:define name="content">
 			<h:form id="schedule-form">
+				<p:poll interval="30" update=":schedule-form" />
 				<p:tabView id="scheduleTab"
 					   value="#{scheduleData.spectacleDays}"
 					   var="spectacleDay"
