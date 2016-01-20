@@ -12,53 +12,68 @@
 		<ui:define name="title">Performance</ui:define>
 		<ui:define name="content">
 			<h1>Performance – Admin</h1>
-			<h:form class="form-horizontal">
-				<div class="form-group">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Artist</label>
-						<div class="col-sm-3">
-							<p class="form-control-static">AAA</p>
+			<div class="row">
+				<div class="col-md-6">
+					<h2>Edit Performance</h2>
+					<h:form class="form-horizontal">
+						<div class="form-group">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Artist</label>
+								<div class="col-sm-3">
+									<p class="form-control-static">AAA</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Venue</label>
+								<div class="col-sm-3">
+									<p:selectOneMenu value="#{performanceData.selectedVenue}"
+											 var="v"
+											 converter="entityConverter">
+										<f:selectItems value="#{performanceData.venues}"
+											       var="venue"
+											       itemLabel="#{venue.description}"
+											       itemValue="#{venue}" />
+										<p:column>#{v.description}</p:column>
+									</p:selectOneMenu>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Time slot</label>
+								<div class="col-sm-3">
+									<p:selectOneMenu value="#{performanceData.selectedSpectacledayTimeSlot}"
+											 var="t"
+											 converter="entityConverter">
+										<f:selectItems value="#{performanceData.spectacledayTimeslots}"
+											       var="ts"
+											       itemLabel="#{ts.timeSlot.start}"
+											       itemValue="#{ts}" />
+										<p:column>#{t.timeSlot.start} - #{t.timeSlot.end}</p:column>
+									</p:selectOneMenu>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2 control-label"></div>
+								<div class="col-sm-3">
+									<p:commandButton value="Save changes"
+											 update="@form"
+											 class="btn btn-primary"
+											 action="#{performanceData.saveChanges}" />
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Venue</label>
-						<div class="col-sm-3">
-							<p:selectOneMenu value="#{performanceData.selectedVenue}"
-									 var="v"
-									 converter="entityConverter">
-								<f:selectItems value="#{performanceData.venues}"
-									       var="venue"
-									       itemLabel="#{venue.description}"
-									       itemValue="#{venue}" />
-								<p:column>#{v.description}</p:column>
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Time slot</label>
-						<div class="col-sm-3">
-							<p:selectOneMenu value="#{performanceData.selectedSpectacledayTimeSlot}"
-									 var="t"
-									 converter="entityConverter">
-								<f:selectItems value="#{performanceData.spectacledayTimeslots}"
-									       var="ts"
-									       itemLabel="#{ts.timeSlot.start}"
-									       itemValue="#{ts}" />
-								<p:column>#{t.timeSlot.start} - #{t.timeSlot.end}</p:column>
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-2 control-label"></div>
-						<div class="col-sm-3">
-							<p:commandButton value="Save changes"
-									 update="@form"
-									 class="btn btn-primary"
-									 action="#{performanceData.saveChanges}" />
-						</div>
-					</div>
+					</h:form>					
 				</div>
-			</h:form>
+				<div class="col-md-6">
+					<h2>Cancel Performance</h2>
+					<h:form>
+						<p:commandButton value="Cancel performance"
+								 update="@form"
+								 class="btn btn-danger"
+								 action="#{performanceData.deletePerformance}"
+								 ajax="false"/>
+					</h:form>
+				</div>
+			</div>
 		</ui:define>
 	</ui:composition>
 </html>

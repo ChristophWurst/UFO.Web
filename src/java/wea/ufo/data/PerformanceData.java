@@ -178,6 +178,13 @@ public class PerformanceData implements Serializable {
 		}
 		return "schedule";
 	}
+	
+	public String deletePerformance() { 
+		LOG.log(Level.INFO, "deleting performance <{0}>", performance.getId());
+		performance.setArtistId(0); // delete
+		serviceLocator.getUFOBusinessDelegate().updatePerformance(spectacleDay, performance);
+		return "schedule";
+	}
 
 	private void loadData() {
 		if (performance == null) {
