@@ -1,8 +1,15 @@
 package wea.ufo.data;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import wea.ufo.util.ServiceLocator;
 import wea.ufo.ws.*;
 import wea.ufo.ws.UFO;
@@ -13,10 +20,21 @@ import wea.ufo.ws.UFOSoap;
  */
 public class WebServiceBusinessDelegate implements UFOBusinessDelegate, Serializable {
 
-	private final UFOSoap ws;
+	private static final Logger LOG = Logger.getLogger(WebServiceBusinessDelegate.class.getName());
+	private UFOSoap ws = null;
 
 	public WebServiceBusinessDelegate() {
-		UFO ufo = new UFO();
+		LOG.log(Level.INFO, "creating webServiceBusinessDelegate");
+
+		UFO ufo;
+		try {
+			String wsdlLocation = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("WSDL_LOCATION");
+			LOG.log(Level.INFO, "wsdl location: {0}", wsdlLocation == null ? "-" : wsdlLocation);
+			ufo = new UFO(new URL(wsdlLocation));
+		} catch (Exception ex) {
+			LOG.log(Level.WARNING, "{0}could not load wsdl location from web.xml: ", ex.getClass().getName());
+			ufo = new UFO();
+		}
 		ws = ufo.getUFOSoap();
 	}
 

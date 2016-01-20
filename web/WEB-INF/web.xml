@@ -36,6 +36,10 @@
 		<param-name>BUSINESS_DELEGATE</param-name>
 		<param-value>wea.ufo.data.WebServiceBusinessDelegate</param-value>
 	</context-param>
+	<context-param>
+		<param-name>WSDL_LOCATION</param-name>
+		<param-value>http://localhost:49353/UFO.asmx?wsdl</param-value>
+	</context-param>
     
 	<listener>
 		<display-name>InitializeContextListener</display-name>
