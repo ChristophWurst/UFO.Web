@@ -176,14 +176,14 @@ public class PerformanceData implements Serializable {
 			LOG.log(Level.SEVERE, "error updating performance: {0}", e.getMessage());
 			return "performances?performanceId=" + performance.getId() + "&faces-redirect=true";
 		}
-		return "schedule";
+		return "schedule?faces-redirect=true";
 	}
 	
 	public String deletePerformance() { 
 		LOG.log(Level.INFO, "deleting performance <{0}>", performance.getId());
 		performance.setArtistId(0); // delete
 		serviceLocator.getUFOBusinessDelegate().updatePerformance(spectacleDay, performance);
-		return "schedule";
+		return "schedule?faces-redirect=true";
 	}
 
 	private void loadData() {
