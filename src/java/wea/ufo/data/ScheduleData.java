@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.view.ViewScoped;
