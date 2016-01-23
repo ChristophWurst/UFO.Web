@@ -14,12 +14,15 @@ body {
 }
 
 /* Header top, left */
-#schedule .row.header div, #schedule .row div:first-child {
+#schedule .row div:first-child {
+	background-color: #f0f0f0;
+}
+#schedule .row.header div {
 	background-color: lightgray;
 }
 
 /* schedule content */
-#schedule .row:not(.header) div:not(:first-child) {
+#schedule .row div {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
