@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -50,7 +51,9 @@ public class AreaData implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		areas = serviceLocator.getUFOBusinessDelegate().getAreas();
+		areas = serviceLocator.getUFOBusinessDelegate().getAreas().stream().sorted((Area a1, Area a2) -> {
+			return a1.getName().compareTo(a2.getName());
+		}).collect(Collectors.toList());
 		selectAreaFromParameter();
 	}
 

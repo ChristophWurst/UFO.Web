@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -79,7 +80,9 @@ public class CategoryData implements Serializable {
 	@PostConstruct
 	public void init() {
 		LOG.log(Level.INFO, "loading categories");
-		categories = serviceLocator.getUFOBusinessDelegate().getCategories();
+		categories = serviceLocator.getUFOBusinessDelegate().getCategories().stream().sorted((c1, c2) -> {
+			return c1.getDescription().compareTo(c2.getDescription());
+		}).collect(Collectors.toList());
 		selectCategoryFromParameter();
 	}
 

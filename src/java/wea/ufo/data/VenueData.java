@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
@@ -108,7 +109,9 @@ public class VenueData implements Serializable {
 		Area a = areaData.getSelectedArea();
 		if (a != selectedArea) {
 			selectedArea = a;
-			venues = serviceLocator.getUFOBusinessDelegate().getVenuesForArea(a);
+			venues = serviceLocator.getUFOBusinessDelegate().getVenuesForArea(a).stream().sorted((v1, v2) -> {
+				return v1.getDescription().compareTo(v2.getDescription());
+			}).collect(Collectors.toList());
 			selectVenueFromParameter();
 		}
 	}

@@ -74,7 +74,7 @@ public class ArtistData implements Serializable {
 		String parameter = httpServletRequest.getParameter("artistId");
 		if (parameter != null) {
 			final int parameterId = Integer.parseInt(parameter);
-			
+
 			// try to locate get-parameter artist
 			try {
 				Artist fromParameter = artists.stream().filter((Artist a) -> {
@@ -109,7 +109,9 @@ public class ArtistData implements Serializable {
 			LOG.log(Level.INFO, "loading artists for category <{0}> ", cat.getId());
 			artists = serviceLocator.getUFOBusinessDelegate().getArtistsForCategory(cat);
 			countries = new HashMap<>();
-			serviceLocator.getUFOBusinessDelegate().getCountries().forEach((Country c) -> {
+			serviceLocator.getUFOBusinessDelegate().getCountries().stream().sorted((a1, a2) -> {
+				return a1.getName().compareTo(a2.getName());
+			}).forEach((Country c) -> {
 				countries.put(c.getId(), c);
 			});
 
