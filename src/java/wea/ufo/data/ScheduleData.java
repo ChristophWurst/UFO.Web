@@ -1,16 +1,23 @@
 package wea.ufo.data;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.primefaces.event.TabChangeEvent;
 import wea.ufo.model.ScheduleArea;
 import wea.ufo.model.SchedulePerformance;
@@ -60,23 +67,37 @@ public class ScheduleData implements Serializable {
 	@PostConstruct
 	public void init() {
 		LOG.log(Level.INFO, "initializing scheduleData");
-		loadData();
+		try {
+			loadData();
+		} catch (DatatypeConfigurationException ex) {
+			Logger.getLogger(ScheduleData.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		if (!spectacleDays.isEmpty()) {
 			loadSelectedSpectacleDayData();
 		}
 	}
 
-	private void loadData() {
+	private void loadData() throws DatatypeConfigurationException {
 		LOG.log(Level.INFO, "loading schedule data");
 		UFOBusinessDelegate bd = serviceLocator.getUFOBusinessDelegate();
 
 		spectacleDays = new ArrayList<>();
 		List<Spectacleday> days = bd.getSpectacleDays();
-		days.stream().map((Spectacleday d) -> {
+		GregorianCalendar cal = new GregorianCalendar();
+
+		cal.setTime(new Date());
+		XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
+
+		days.stream().filter((Spectacleday sd) -> {
+			// Only show schedules for today and the future
+			return sd.getDay().compare(now) >= 0;
+		}).sorted((Spectacleday sd1, Spectacleday sd2) -> {
+			// Order ascending -> current date automatically selected by default
+			return sd1.getDay().compare(sd2.getDay());
+		}).map((Spectacleday d) -> {
 			return new ScheduleSpectacleDay(d);
-		}).forEach(ssd -> {
-			spectacleDays.add(ssd);
-		});
+		}).forEach(spectacleDays::add);
+
 		if (!spectacleDays.isEmpty()) {
 			selectedSpectacleDay = spectacleDays.get(0);
 			selectedSpectacleDayIndex = 0;
