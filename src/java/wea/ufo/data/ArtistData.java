@@ -1,7 +1,9 @@
 package wea.ufo.data;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import org.primefaces.event.SelectEvent;
 import wea.ufo.util.ServiceLocator;
 import wea.ufo.ws.Artist;
 import wea.ufo.ws.Category;
+import wea.ufo.ws.Country;
 
 /**
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -24,6 +27,7 @@ public class ArtistData implements Serializable {
 
 	private static final Logger LOG = Logger.getLogger(ArtistData.class.getName());
 	private List<Artist> artists;
+	private Map<Integer, Country> countries;
 	private Artist selectedArtist;
 	private Category selectedCategory;
 	@Inject
@@ -104,6 +108,11 @@ public class ArtistData implements Serializable {
 			selectedCategory = cat;
 			LOG.log(Level.INFO, "loading artists for category <{0}> ", cat.getId());
 			artists = serviceLocator.getUFOBusinessDelegate().getArtistsForCategory(cat);
+			countries = new HashMap<>();
+			serviceLocator.getUFOBusinessDelegate().getCountries().forEach((Country c) -> {
+				countries.put(c.getId(), c);
+			});
+
 			loadArtistFromParameterOrDefault();
 		}
 	}
@@ -144,6 +153,10 @@ public class ArtistData implements Serializable {
 		LOG.log(Level.INFO, "artist <{0}> selected", selectedArtist == null ? "non" : selectedArtist.getId());
 		loadArtists();
 		return selectedArtist;
+	}
+
+	public Country getSelectedArtistCountry() {
+		return countries.get(selectedArtist.getCountryId());
 	}
 
 	/**

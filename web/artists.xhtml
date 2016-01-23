@@ -54,18 +54,26 @@
 						</p:dataTable>
 					</div>
 					<div class="col-md-6">
-						<h2><h:outputText value="#{artistData.selectedArtist.name}" /></h2>
-						<p:graphicImage value="http://www.winzerhof-wurst.at/ufo/#{artistData.selectedArtist.image}"
-								rendered="#{artistData.selectedArtist.image != null}"/>
-						<h3>Video</h3>
-						<h:panelGroup layout="block" 
-							      class="embed-responsive embed-responsive-16by9"
+						<h2>
+							<h:outputText value="#{artistData.selectedArtist.name}" />
+							<small>#{artistData.selectedArtistCountry.name}</small>
+						</h2>
+						<h:panelGroup layout="block"
+							      rendered="#{artistData.selectedArtist.image != null}">
+							<h3>Bild</h3>
+							<p:graphicImage value="#{artistData.selectedArtist.image}" />
+						</h:panelGroup>
+						<h:panelGroup layout="block"
 							      rendered="#{artistData.selectedArtist.video != null}">
-							<iframe width="560"
-								height="315"
-								src="https://www.youtube.com/embed/#{artistData.selectedArtist.video}"
-								frameborder="0"
-								allowfullscreen="true" />
+							<h3>Video</h3>
+							<h:panelGroup layout="block" 
+								      class="embed-responsive embed-responsive-16by9">
+								<iframe width="560"
+									height="315"
+									src="https://www.youtube.com/embed/#{artistData.selectedArtist.video}"
+									frameborder="0"
+									allowfullscreen="true" />
+							</h:panelGroup>
 						</h:panelGroup>
 					</div>
 				</div>

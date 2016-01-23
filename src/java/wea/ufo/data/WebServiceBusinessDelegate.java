@@ -119,4 +119,9 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate, Serializ
 		return ws.login(email, password);
 	}
 
+	@Override
+	public List<Country> getCountries() {
+		return ws.getCountries().getCountry();
+	}
+
 }

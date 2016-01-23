@@ -217,4 +217,9 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 		return email.equals("user@example.com") && password.equals("12345");
 	}
 
+	@Override
+	public List<Country> getCountries() {
+		return new ArrayList<>();
+	}
+
 }

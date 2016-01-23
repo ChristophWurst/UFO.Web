@@ -39,4 +39,6 @@ public interface UFOBusinessDelegate extends Serializable {
 
 	public boolean Login(String email, String password);
 
+	public List<Country> getCountries();
+
 }
