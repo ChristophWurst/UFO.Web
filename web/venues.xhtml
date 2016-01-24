@@ -11,6 +11,27 @@
 				<div class="col-md-9">
 					<h1>Venues</h1>
 				</div>
+				<div class="col-md-3">
+					<h:panelGroup class="input-group" id="search-container" layout="block">
+						<p:autoComplete id="search" 
+								completeMethod="#{venueSearch.searchVenues}"
+								var="searchVenue"
+								value="#{venueSearch.selectedVenue}"
+								itemLabel="#{searchVenue.description}" 
+								itemValue="#{searchVenue}"
+								converter="entityConverter"
+								forceSelection="true">
+							<p:ajax event="itemSelect" listener="#{venueSearch.onVenueSelected}" update=":search-container" />
+						</p:autoComplete>
+						<span>
+							<h:panelGroup rendered="#{venueSearch.selectedVenue != null}">
+								<h:link outcome="#{venueSearch.selectedVenueLink}" 
+									value="GO"
+									class="btn btn-default" />
+							</h:panelGroup>
+						</span>
+					</h:panelGroup><!-- /input-group -->
+				</div>
 			</div>
 			<h:form>
 				<div class="container row">
