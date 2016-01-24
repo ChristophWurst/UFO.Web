@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import wea.ufo.util.ServiceLocator;
+import wea.ufo.ws.Artist;
 import wea.ufo.ws.Performance;
 import wea.ufo.ws.Spectacleday;
 import wea.ufo.ws.SpectacledayTimeSlot;
@@ -28,6 +29,7 @@ public class PerformanceData implements Serializable {
 	private Performance performance;
 	private List<Venue> venues;
 	private Spectacleday day;
+	private Artist artist;
 	private List<SpectacledayTimeSlot> spectacledayTimeSlots;
 	private SpectacledayTimeSlot selectedSpectacledayTimeSlot;
 
@@ -128,6 +130,10 @@ public class PerformanceData implements Serializable {
 	public Spectacleday getDay() {
 		return day;
 	}
+	
+	public Artist getArtist() {
+		return artist;
+	}
 
 	/**
 	 * Set the value of day
@@ -198,6 +204,8 @@ public class PerformanceData implements Serializable {
 
 			venues = serviceLocator.getUFOBusinessDelegate().getVenues();
 			setSelectedVenue(venues.stream().filter((Venue v) -> v.getId() == performance.getVenueId()).findFirst().get());
+			
+			artist = serviceLocator.getUFOBusinessDelegate().getArtistById(performance.getArtistId());
 
 			List<SpectacledayTimeSlot> timeSlotsForPerformance = serviceLocator.getUFOBusinessDelegate().getSpectacleDayTimeSlotsForPerformance(performance);
 			SpectacledayTimeSlot performaneTimeslot = timeSlotsForPerformance.get(0); // there is only one

@@ -19,6 +19,8 @@ public interface UFOBusinessDelegate extends Serializable {
 
 	public List<Artist> getArtists();
 
+	public Artist getArtistById(int artistId);
+
 	public List<Artist> getArtistsForCategory(Category cat);
 
 	public List<TimeSlot> getTimeSlots();

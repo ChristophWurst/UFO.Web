@@ -141,6 +141,13 @@ public class DummyBusinessDelegate implements UFOBusinessDelegate, Serializable 
 	}
 
 	@Override
+	public Artist getArtistById(int artistId) {
+		return artists.stream().filter((Artist a) -> {
+			return a.getId() == artistId;
+		}).findFirst().get();
+	}
+
+	@Override
 	public List<Artist> getArtistsForCategory(Category cat) {
 		return artists.stream().filter(a -> a.getCategoryId() == cat.getId()).collect(Collectors.toList());
 	}

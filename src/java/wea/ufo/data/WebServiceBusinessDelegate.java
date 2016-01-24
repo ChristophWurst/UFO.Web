@@ -64,6 +64,13 @@ public class WebServiceBusinessDelegate implements UFOBusinessDelegate, Serializ
 	}
 
 	@Override
+	public Artist getArtistById(int artistId) {
+		Artist search = new Artist();
+		search.setId(artistId);
+		return ws.getArtistById(search);
+	}
+
+	@Override
 	public List<Artist> getArtistsForCategory(Category cat) {
 		return ws.getArtistsForCategory(cat).getArtist();
 	}
