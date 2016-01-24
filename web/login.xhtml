@@ -2,28 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>LOGIN - UFO</title>
-        <h:outputStylesheet name="ufo.css"/>
-    </h:head>
-    <h:body>
-        <div id="login-container">
-            <h:form>
-                <p:panel id="basic" header="UFO Login">
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputText value="E-Mail: " />
-                        <p:inputText value="#{userData.loginEmail}" />
-                        <h:outputText value="Password: " />
-                        <p:password value="#{userData.loginPassword}" />
-                        <h:outputText />
-                        <p:commandButton value="Login"
-                                         action="#{userData.login}"
-                                         ajax="false"/>
-                    </h:panelGrid>
-                </p:panel>
-            </h:form>
-        </div>
-    </h:body>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<h:head>
+		<title>LOGIN - UFO</title>
+		<h:outputStylesheet name="ufo.css"/>
+	</h:head>
+	<h:body>
+		<div id="login-container">
+			<h:form>
+				<p:panel id="basic" header="UFO Login">
+					<p:messages id="msgs" />
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="E-Mail: " />
+						<p:inputText label="E-Mail"
+							     value="#{userData.loginEmail}"
+							     required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<h:outputText value="Password: " />
+						<p:password label="Password"
+							    value="#{userData.loginPassword}"
+							    required="true">
+							<f:validateLength minimum="2" />
+						</p:password>
+						<h:outputText />
+						<p:commandButton value="Login"
+								 action="#{userData.login}"
+								 ajax="false"/>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</div>
+	</h:body>
 </html>
 

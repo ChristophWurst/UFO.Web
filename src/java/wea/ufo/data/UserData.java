@@ -97,8 +97,8 @@ public class UserData implements Serializable {
 		if (!result) {
 			LOG.log(Level.WARNING, "Invaild credentials for user <{0}>", loginEmail);
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage("username", new FacesMessage("Invalid UserName and Password"));
-			return "login";
+			context.addMessage("username", new FacesMessage("Invalid email or password"));
+			return "login?faces-redirect=true";
 		}
 
 		LOG.log(Level.INFO, "User <{0}> logged in successfully", loginEmail);
