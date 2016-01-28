@@ -97,7 +97,11 @@ public class UserData implements Serializable {
 		if (!result) {
 			LOG.log(Level.WARNING, "Invaild credentials for user <{0}>", loginEmail);
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage("username", new FacesMessage("Invalid email or password"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Login error", "Invalid email or password"));
+
+			// Flash message so it's not lost during redirect
+			context.getExternalContext().getFlash().setKeepMessages(true);
+
 			return "login?faces-redirect=true";
 		}
 

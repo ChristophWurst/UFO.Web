@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -130,7 +132,7 @@ public class PerformanceData implements Serializable {
 	public Spectacleday getDay() {
 		return day;
 	}
-	
+
 	public Artist getArtist() {
 		return artist;
 	}
@@ -162,10 +164,18 @@ public class PerformanceData implements Serializable {
 	public void setSelectedSpectacledayTimeSlot(SpectacledayTimeSlot selectedSpectacledayTimeSlot) {
 		this.selectedSpectacledayTimeSlot = selectedSpectacledayTimeSlot;
 	}
-	
+
 	public void onVenueChanged(AjaxBehaviorEvent e) {
 		//Venue v = (Venue) e.getNewValue();
 		LOG.log(Level.INFO, "performance venue <{0}> selected");
+	}
+
+	private String unWrapSoapException(String message) {
+		String start = "--->";
+		int pos = message.indexOf(start);
+		int x = pos + start.length() + 1;
+
+		return message.substring(x);
 	}
 
 	/**
@@ -173,19 +183,25 @@ public class PerformanceData implements Serializable {
 	 */
 	public String saveChanges() {
 		LOG.log(Level.INFO, "saving changes of performance <{0}>", performance.getId());
-		
+
 		performance.setVenueId(getSelectedVenue().getId());
 		performance.setSpectacledayTimeSlot(getSelectedSpectacledayTimeSlot().getId());
 		try {
 			serviceLocator.getUFOBusinessDelegate().updatePerformance(spectacleDay, performance);
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, "error updating performance: {0}", e.getMessage());
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error!", "Could not update performance: " + unWrapSoapException(e.getMessage())));
+
+			// Flash message so it's not lost during redirect
+			context.getExternalContext().getFlash().setKeepMessages(true);
+
 			return "performances?performanceId=" + performance.getId() + "&faces-redirect=true";
 		}
 		return "schedule?faces-redirect=true";
 	}
-	
-	public String deletePerformance() { 
+
+	public String deletePerformance() {
 		LOG.log(Level.INFO, "deleting performance <{0}>", performance.getId());
 		performance.setArtistId(0); // delete
 		serviceLocator.getUFOBusinessDelegate().updatePerformance(spectacleDay, performance);
@@ -204,7 +220,7 @@ public class PerformanceData implements Serializable {
 
 			venues = serviceLocator.getUFOBusinessDelegate().getVenues();
 			setSelectedVenue(venues.stream().filter((Venue v) -> v.getId() == performance.getVenueId()).findFirst().get());
-			
+
 			artist = serviceLocator.getUFOBusinessDelegate().getArtistById(performance.getArtistId());
 
 			List<SpectacledayTimeSlot> timeSlotsForPerformance = serviceLocator.getUFOBusinessDelegate().getSpectacleDayTimeSlotsForPerformance(performance);
